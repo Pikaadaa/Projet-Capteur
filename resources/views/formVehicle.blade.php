@@ -26,6 +26,20 @@
             <label for="registration">Immatriculation du véhicule</label>
             <input type="text" name="registration" id="registration" required>
         </div>
+        <div class="kilometer">
+            <label for="kilometer">Kilométrage du véhicule</label>
+            <input type="text" name="kilometer" id="kilometer" required>
+        </div>
+        <div class="date_of_manufacture">
+            <label for="date_of_manufacture">Date de création du véhicule</label>
+            <input type="text" name="date_of_manufacture" id="date_of_manufacture" required>
+        </div>
+        <div class="employee">
+            <label for="employee">Salarié en charge du véhicule</label>
+            <select name="employee" id="employee">
+
+            </select>
+        </div>
         <div class="buton">
             <input type="submit" value="Enregister le véhicule">
         </div>

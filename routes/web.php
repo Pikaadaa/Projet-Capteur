@@ -17,12 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/add/vehicle', function () {
-    return view('formVehicle');
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/vehicle/create', 'App\Http\Controllers\VehicleController@create')->name('vehicle.create');
+Route::post('/vehicle/create', 'App\Http\Controllers\VehicleController@enregister')->name('vehicle.enregister');
 
 require __DIR__.'/auth.php';
