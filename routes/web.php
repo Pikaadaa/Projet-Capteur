@@ -23,5 +23,8 @@ Route::get('/dashboard', function () {
 
 Route::get('/vehicle/create', 'App\Http\Controllers\VehicleController@create')->name('vehicle.create');
 Route::post('/vehicle/create', 'App\Http\Controllers\VehicleController@enregister')->name('vehicle.enregister');
+Route::get('/vehicle', 'App\Http\Controllers\VehicleController@show')->name('vehicle.show');
+Route::get('/vehicle/delete/{id}', 'App\Http\Controllers\VehicleController@delete')->name('vehicle.delete');
+Route::get('/vehicle/update/{id}', 'App\Http\Controllers\VehicleController@update')->name('vehicle.update');
 
 require __DIR__.'/auth.php';

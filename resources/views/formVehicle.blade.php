@@ -2,7 +2,8 @@
 
 @section('content')
 
-<form action="">
+<form method="POST" action="{{ route('vehicle.enregister') }}">
+    @csrf
     <div>
         <h1>Ajouter un véhicule</h1>
         <div class="name">
@@ -37,7 +38,10 @@
         <div class="employee">
             <label for="employee">Salarié en charge du véhicule</label>
             <select name="employee" id="employee">
-
+                <option value="default">Choisissez ou non le salarié</option>
+                @foreach($employees as $employee)
+                    <option value="{{ $employee->name }}">{{ $employee->name }}</option>
+                @endforeach
             </select>
         </div>
         <div class="buton">
