@@ -2,10 +2,12 @@
 
 @section('content')
 
+<button><a href="{{ route('vehicle.show')}}">Annuler</a></button>
 <form method="POST" action="{{ route('vehicle.enregister') }}">
     @csrf
     <div>
         <h1>Ajouter un véhicule</h1>
+
         <div class="name">
             <label for="name">Désignation du véhicule</label>
             <input type="text" name="name" id="name" required>
@@ -45,7 +47,7 @@
             </select>
         </div>
         <div class="buton">
-            <input type="submit" value="Enregister le véhicule">
+            <input type="submit" value="Ajouter">
         </div>
     </div>
 </form>

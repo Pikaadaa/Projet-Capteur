@@ -20,6 +20,8 @@ class VehicleController extends Controller
     public function enregister(Request $request){
 
         $employees_id = Employee::where('name', '=', $request->employee)->get('id');
+        $vehicles = Vehicle::orderBy('id')->get();
+        $employees = Employee::all();
 
         foreach($employees_id as $employee_id){
             Vehicle::create([
@@ -33,7 +35,8 @@ class VehicleController extends Controller
                 'employee_id'=>$employee_id->id
             ]); 
         };
-        return view('vehicles');
+
+        return redirect('vehicle');
     }
 
     public function show(){
@@ -55,12 +58,38 @@ class VehicleController extends Controller
         return redirect('vehicle');
     }
 
-    public function update($id){
 
+    public function showData($id, $employee_id){
 
-        return view('vehicles');
+        $vehicle = Vehicle::find($id);
+        $employees = Employee::all();
+        $employees_name = Employee::where('id','=',$employee_id)->get();
+
+        return view('edit', [
+            'vehicle'=>$vehicle,
+            'employees'=>$employees,
+            'employees_name'=>$employees_name
+        ]);
     }
 
+    public function update(Request $request){
+
+        $employees_id = Employee::where('name', '=', $request->employee)->get('id');
+
+        foreach($employees_id as $employee_id){
+            $vehicles=Vehicle::find($request->id);
+            $vehicles->name=$request->name;
+            $vehicles->brand=$request->brand;
+            $vehicles->model=$request->model;
+            $vehicles->registration=$request->registration;
+            $vehicles->kilometer=$request->kilometer;
+            $vehicles->date_of_manufacture=$request->date_of_manufacture;
+            $vehicles->employee_id=$employee_id->id;
+            $vehicles->save();
+        };
+        
+        return redirect('vehicle');
+    }
 }
 
 
