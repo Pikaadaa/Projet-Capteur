@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Vehicle;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class VehicleController extends Controller
 {
@@ -12,45 +13,44 @@ class VehicleController extends Controller
 
         $employees = Employee::all();
 
-        return view('formVehicle',[
+        return view('vehicle.create',[
             'employees'=> $employees
         ]);
     }
 
-    public function enregister(Request $request){
+    public function store(Request $request){
 
-        $employees_id = Employee::where('name', '=', $request->employee)->get('id');
-        $vehicles = Vehicle::orderBy('id')->get();
-        $employees = Employee::all();
+        $validated = $request->validate([
+            'registration' => 'required|unique:vehicles'
+        ]);
 
-        foreach($employees_id as $employee_id){
-            Vehicle::create([
-                'name'=>$request->name,
-                'brand'=>$request->brand,
-                'model'=>$request->model,
-                'registration'=>$request->registration,
-                'kilometer'=>$request->kilometer,
-                'date_of_manufacture'=>$request->date_of_manufacture,
-                'date_of_etablishment'=>$request->date_of_etablishment,
-                'employee_id'=>$employee_id->id
-            ]); 
-        };
+        Vehicle::create([
+            'name'=>$request->name,
+            'brand'=>$request->brand,
+            'model'=>$request->model,
+            'registration'=>$request->registration,
+            'kilometer'=>$request->kilometer,
+            'date_of_manufacture'=>$request->date_of_manufacture,
+            'date_of_etablishment'=>$request->date_of_etablishment,
+            'employee_id'=>$request->employee
+        ]); 
+
 
         return redirect('vehicle');
     }
 
-    public function show(){
+    public function index(){
 
         $vehicles = Vehicle::orderBy('id')->get();
         $employees = Employee::all();
 
-        return view('vehicles',[
+        return view('vehicle.index',[
             'vehicles'=> $vehicles,
             'employees'=> $employees
         ]);
     }
 
-    public function delete($id){
+    public function destroy($id){
 
         $vehicle= Vehicle::find($id);
         $vehicle->delete();
@@ -59,20 +59,25 @@ class VehicleController extends Controller
     }
 
 
-    public function showData($id, $employee_id){
+    public function edit($id){
 
         $vehicle = Vehicle::find($id);
         $employees = Employee::all();
-        $employees_name = Employee::where('id','=',$employee_id)->get();
+        $employee_name = $vehicle->employee;
+        //dd($employee_name);
 
-        return view('edit', [
+        return view('vehicle.edit', [
             'vehicle'=>$vehicle,
             'employees'=>$employees,
-            'employees_name'=>$employees_name
+            'employee_name'=>$employee_name
         ]);
     }
 
     public function update(Request $request){
+
+        $validated = $request->validate([
+            'registration' => 'required',Rule::unique('vehicles', 'registration')->ignore($request->registration)
+        ]);
 
         $employees_id = Employee::where('name', '=', $request->employee)->get('id');
 

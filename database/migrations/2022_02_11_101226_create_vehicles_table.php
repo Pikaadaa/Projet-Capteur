@@ -24,7 +24,7 @@ class CreateVehiclesTable extends Migration
             $table->time('date_of_establishment')->nullable();
             //$table->foreignId('captur_id')->referances('id')->on('capturs');
             //$table->foreignId('mission_id')->referances('id')->on('missions');
-            $table->foreignId('employee_id')->referances('id')->on('employees');
+            $table->foreignId('employee_id')->referances('id')->on('employees')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
