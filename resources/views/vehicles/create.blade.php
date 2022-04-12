@@ -1,10 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<button class="btn btn-danger"><a class="text-white text-decoration-none" href="{{ route('vehicle.index')}}">Annuler</a></button>
-<form method="POST" action="{{ route('vehicle.store') }}">
+<button class="btn btn-danger"><a class="text-white text-decoration-none" href="{{ route('vehicles.index')}}">Annuler</a></button>
+<form method="POST" action="{{ route('vehicles.store') }}">
     @csrf
     <div>
         <h1>Ajouter un véhicule</h1>
@@ -15,7 +13,6 @@
         <div class="brand">
             <label for="brand">Marque du véhicule</label>
             <select class="form-select" name="brand" id="brand" required>
-                <option value="" disabled selected>Choisissez la marque du véhicule</option>
                 <option value="Renault">Renault</option>
                 <option value="Toyota">Toyota</option>
                 <option value="Peugeot">Peugeot</option>
@@ -39,8 +36,8 @@
         </div>
         <div class="employee mb-2">
             <label for="employee">Salarié en charge du véhicule</label>
-            <select class="form-select" name="employee" id="employee">
-                <option value="">Choisissez ou non le salarié</option>
+            <select class="form-select" name="employee_id" id="employee">
+                <option value="">Ne pas affecter</option>
                 @foreach($employees as $employee)
                     <option value="{{ $employee->id }}">{{ $employee->name }}</option>
                 @endforeach

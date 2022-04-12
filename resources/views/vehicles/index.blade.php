@@ -1,14 +1,8 @@
-@php
-    use App\Models\Employee;
-@endphp
-
 @extends('layouts.app')
 
 @section('content')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/c6d5382c87.js" crossorigin="anonymous"></script>
     <h1>Liste des véhicules</h1>
-    <button class="btn btn-success "><a class="text-white text-decoration-none" href="{{ route('vehicle.create') }}">Ajouter</a></button>
+    <button class="btn btn-success "><a class="text-white text-decoration-none" href="{{ route('vehicles.create') }}">Ajouter</a></button>
     @if ($vehicles->count() > 0 )
         <table class="text-center table table-striped">
             <thead>
@@ -39,11 +33,11 @@
                             <td>Aucun</td>
                         @endif
                         <td>
-                            <form action="{{ route('vehicle.destroy',['id' => $vehicle->id]) }}" method="POST">
+                            <form action="{{ route('vehicles.destroy',['vehicle' => $vehicle]) }}" method="POST">
                                 @csrf
-                                <a class="btn btn-primary" href="{{ route('vehicle.edit',['id' => $vehicle->id]) }}">Modifier</a>
+                                <a class="btn btn-primary" href="{{ route('vehicles.edit',['vehicle' => $vehicle]) }}">Modifier</a>
                                 @method('delete')
-                                <input class="btn btn-danger" type="submit" value="Supprimer">
+                                <button class="btn btn-danger" type="submit">Supprimer</button>
                             </form>
                         </td>
                     </tr>
@@ -53,5 +47,4 @@
     @else
     <span>Aucun véhicule enregistré</span>
     @endif
-
 @endsection

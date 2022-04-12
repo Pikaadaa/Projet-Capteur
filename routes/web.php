@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VehicleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +22,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/vehicle/create', 'App\Http\Controllers\VehicleController@create')->name('vehicle.create');
-Route::post('/vehicle', 'App\Http\Controllers\VehicleController@store')->name('vehicle.store');
-Route::get('/vehicle', 'App\Http\Controllers\VehicleController@index')->name('vehicle.index');
-Route::delete('/vehicle/{id}', 'App\Http\Controllers\VehicleController@destroy')->name('vehicle.destroy');
-Route::get('/vehicle/edit/{id}', 'App\Http\Controllers\VehicleController@edit')->name('vehicle.edit');
-Route::put('/vehicle/update', 'App\Http\Controllers\VehicleController@update')->name('vehicle.update');
+Route::resource('vehicles', VehicleController::class);
 
 require __DIR__.'/auth.php';
     

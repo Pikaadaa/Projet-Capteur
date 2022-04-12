@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <h1>Modifier le véhicule</h1>
-    <a class=" btn btn-danger text-white text-decoration-none" href="{{ route('vehicle.index')}}">Annuler</a>
-    <form action="{{ route('vehicle.update') }}" method="POST">
+    <a class=" btn btn-danger text-white text-decoration-none" href="{{ route('vehicles.index')}}">Annuler</a>
+    <form action="{{ route('vehicles.update', ['vehicle'=> $vehicle]) }}" method="POST">
     @csrf
     @method('PUT')
         <div>
-            <input type="hidden" name="id" value="{{ $vehicle->id }}">
             <div class="name">
                 <label for="name">Désignation du véhicule</label>
                 <input class="form-control" type="text" name="name" id="name" value="{{ $vehicle->name }}" required>
@@ -16,10 +14,9 @@
             <div class="brand">
                 <label for="brand">Marque du véhicule</label>
                 <select class="form-select" name="brand" id="brand" required>
-                    <option value="{{ $vehicle->brand }}">{{ $vehicle->brand }}</option>
-                    <option value="Renault">Renault</option>
-                    <option value="Toyota">Toyota</option>
-                    <option value="Peugeot">Peugeot</option>
+                    <option value="Renault" @if($vehicle->brand == 'Renault') selected @endif>Renault</option>
+                    <option value="Toyota" @if($vehicle->brand == 'Toyota') selected @endif>Toyota</option>
+                    <option value="Peugeot" @if($vehicle->brand == 'Peugeot') selected @endif>Peugeot</option>
                 </select>
             </div><br>
             <div class="model mb-2">
@@ -40,20 +37,11 @@
             </div>
             <div class="employee mb-2">
                 <label for="employee">Salarié en charge du véhicule</label>
-                <select class="form-select" name="employee" id="employee">
-                    @if($employee_name != null)
-                        <option value="{{ $employee_name->name }}">{{ $employee_name->name }}</option>
-                    @else
-                        <option value="Aucun">Aucun</option>
-                    @endif
-
+                <select class="form-select" name="employee_id" id="employee">
+                    <option value="">Ne pas affecter</option>
                     @foreach($employees as $employee)
-                        <option value="{{ $employee->name }}">{{ $employee->name }}</option>
+                        <option value="{{ $employee->id }}" @if($vehicle->employee_id == $employee->id) selected @endif >{{ $employee->name }}</option>
                     @endforeach
-
-                    @if($employee_name != null)
-                        <option value="Aucun">Aucun</option>
-                    @endif
                 </select>
             </div>
             <div class="buton mb-2">
