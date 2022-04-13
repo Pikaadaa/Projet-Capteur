@@ -20,7 +20,7 @@
             <tbody>
                 @foreach($vehicles as $vehicle)
                     <tr>
-                        <th scope="row">{{ $vehicle->id }}</th>
+                        <th scope="row"><a class="text-black text-decoration-none" href='{{ route('vehicles.show',['vehicle' => $vehicle]) }}'>{{ $vehicle->id }}</a></th>
                         <td>{{ $vehicle->name }}</td>
                         <td>{{ $vehicle->brand }}</td>
                         <td>{{ $vehicle->model }}</td>

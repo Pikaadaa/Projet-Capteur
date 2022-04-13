@@ -6,6 +6,8 @@ use App\Models\Vehicle;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Requests\Vehicles\StoreVehicleRequest;
+use App\Http\Requests\Vehicles\UpdateVehicleRequest;
 
 class VehicleController extends Controller
 {
@@ -29,11 +31,7 @@ class VehicleController extends Controller
         ]);
     }
 
-    public function store(Request $request){
-
-        /*$validated = $request->validate([
-            'registration' => 'required|unique:vehicles'
-        ]);*/
+    public function store(StoreVehicleRequest $request){
 
         Vehicle::create($request->all()); 
 
@@ -41,6 +39,8 @@ class VehicleController extends Controller
     }
 
     public function show(Vehicle $vehicle){
+
+        $employees = Employee::all();
 
         return view("vehicles.show", [
             'vehicle'=>$vehicle,
@@ -57,11 +57,7 @@ class VehicleController extends Controller
         ]);
     }
 
-    public function update(Request $request, Vehicle $vehicle){
-
-        /*$validated = $request->validate([
-            'registration' => 'required',Rule::unique('vehicles', 'registration')->ignore($request->registration)
-        ]);*/
+    public function update(UpdateVehicleRequest $request, Vehicle $vehicle){
 
         $vehicle->update($request->all());
 
