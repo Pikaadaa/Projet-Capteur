@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\Captur;
 use App\Models\Mission;
 use App\Models\Employee;
@@ -13,7 +14,30 @@ class Vehicle extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable =['name','brand','model','registration','kilometer','date_of_manufacture','employee_id'];
+    protected $fillable =['name','brand','model','registration','kilometer','year_of_manufacture','date_of_establishment','employee_id'];
+
+    protected $dates=['date_of_establishment'];
+
+    const BRAND_RENAULT = 1 ;
+    const BRAND_TOYOTA = 2 ;
+    const BRAND_PEUGEOT = 3 ;
+
+
+    public static function brands():array{
+
+        return [
+            self::BRAND_RENAULT => 'Renault',
+            self::BRAND_TOYOTA => 'Toyota',
+            self::BRAND_PEUGEOT => 'Peugeot',
+        ];
+    }
+
+    public function getBrandNameAttribute(){
+        
+        return self::brands()[$this->brand];
+        //brand_name
+    }
+
 
     public function employee(){
         return $this->belongsTo(Employee::class);

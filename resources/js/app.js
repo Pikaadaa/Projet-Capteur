@@ -1,7 +1,11 @@
 require('./bootstrap');
+//require('bootstrap-datepicker/dist/js/bootstrap-datepicker.min');
+//require('bootstrap-datepicker/dist/locales/bootstrap-datepicker.fr.min');
 
-import Alpine from 'alpinejs';
 
-window.Alpine = Alpine;
-
-Alpine.start();
+$(function () {
+    $('.datepicker').datepicker({
+        clearBtn: true,
+        autoclose: true,
+    });
+});

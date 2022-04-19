@@ -25,9 +25,11 @@ class VehicleController extends Controller
     public function create(){
 
         $employees = Employee::all();
+        $brands = Vehicle::brands();
 
         return view('vehicles.create',[
-            'employees'=> $employees
+            'employees'=> $employees,
+            'brands' => $brands
         ]);
     }
 
@@ -40,8 +42,6 @@ class VehicleController extends Controller
 
     public function show(Vehicle $vehicle){
 
-        $employees = Employee::all();
-
         return view("vehicles.show", [
             'vehicle'=>$vehicle,
         ]);
@@ -50,10 +50,12 @@ class VehicleController extends Controller
     public function edit(Vehicle $vehicle){
 
         $employees = Employee::all();
+        $brands = Vehicle::brands();
 
         return view('vehicles.edit', [
             'vehicle'=>$vehicle,
-            'employees'=>$employees
+            'employees'=>$employees,
+            'brands' => $brands
         ]);
     }
 

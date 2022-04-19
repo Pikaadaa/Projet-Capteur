@@ -32,7 +32,9 @@ class UpdateVehicleRequest extends FormRequest
             'model' => 'required',
             'registration' => ['required', Rule::unique('vehicles', 'registration')->ignore($vehicle->registration, 'registration')],
             'kilometer' => 'required|numeric|min:0',
-            'date_of_manufacture' => 'required|date',
+            'year_of_manufacture' => 'required','numeric',
+            'date_of_establishment' => 'required',
+            'employee_id' => 'nullable|exists:employees,id'
         ];
     }
 
@@ -47,8 +49,8 @@ class UpdateVehicleRequest extends FormRequest
             'kilometer.required' => "Veuillez renseignez le kilométrage du véhicule.",
             'kilometer.numeric' => "Veuillez renseignez un kilométrage valide.",
             'kilometer.min' => "Veuillez renseignez un kilométrage valide.",
-            'date_of_manufacture.date' => "Veuillez renseignez une date valide.",
-            'date_of_manufacture.required' => "Veuillez renseignez une date."
+            'date_of_establishment.date' => "Veuillez renseignez une date valide.",
+            'date_of_establishment.required' => "Veuillez renseignez une date."
         ];
     }
 }
