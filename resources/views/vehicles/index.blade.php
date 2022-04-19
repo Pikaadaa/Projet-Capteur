@@ -14,7 +14,7 @@
                     <th scope="col">Immatriculation</th>                    
                     <th scope="col">Kilométrage</th>
                     <th scope="col">Année d’acquisition</th>
-                    <th scope="col">Date de mise en service</th>
+                    <th scope="col">Date de première mise en circulation</th>
                     <th scope="col">Salarié responsable du véhicule</th>
                     <th scope="col">Bouton</th>
                 </tr>
@@ -24,7 +24,7 @@
                     <tr>
                         <th scope="row"><a class="text-black text-decoration-none" href='{{ route('vehicles.show',['vehicle' => $vehicle]) }}'>{{ $vehicle->id }}</a></th>
                         <td>{{ $vehicle->name }}</td>
-                        <td>{{ $vehicle->brand }}</td>
+                        <td>{{ $brands[$vehicle->brand] }}</td>
                         <td>{{ $vehicle->model }}</td>
                         <td>{{ $vehicle->registration }}</td>
                         <td>{{ $vehicle->kilometer }}</td>     

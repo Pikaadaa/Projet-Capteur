@@ -42,7 +42,7 @@
                 <p class="text-danger">{{ $errors->first('year_of_manufacture') }}</p>
             </div>
             <div class="date date_of_establishment mb-2" >
-                <label for="date_of_establishment">Date de mise en service du véhicule</label>
+                <label for="date_of_establishment">Date de première mise en circulation</label>
                 <input class="datepicker form-control @if($errors->has('date_of_establishment')) is-invalid @endif" type="text" name="date_of_establishment" value="{{ old('date_of_establishment', $vehicle->date_of_establishment->format('d/m/Y')) }}" required >
                 <p class="text-danger">{{ $errors->first('date_of_establishment') }}</p>
             </div>

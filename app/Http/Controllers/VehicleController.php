@@ -16,9 +16,11 @@ class VehicleController extends Controller
     public function index(){
 
         $vehicles = Vehicle::orderBy('id')->get();
+        $brands = Vehicle::brands();
 
         return view('vehicles.index',[
             'vehicles'=> $vehicles,
+            'brands' => $brands
         ]);
     }
 
