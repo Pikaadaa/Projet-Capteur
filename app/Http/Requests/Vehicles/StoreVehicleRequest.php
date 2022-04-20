@@ -30,7 +30,7 @@ class StoreVehicleRequest extends FormRequest
             'registration' => 'required|unique:vehicles',
             'kilometer' => 'required|numeric|min:0',
             'year_of_manufacture' => 'required','numeric',
-            'date_of_establishment' => 'required','date',
+            'date_of_establishment' => 'required','date_format:"d-m-Y"',
             'employee_id' => 'nullable|exists:employees,id'
         ];
     }

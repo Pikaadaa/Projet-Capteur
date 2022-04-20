@@ -38,6 +38,10 @@ class Vehicle extends Model
         //brand_name
     }
 
+    public function setDateOfEstablishmentAttribute($value){
+        $date = Carbon::CreateFromFormat('d/m/Y', $value);
+        $this->attributes['date_of_establishment'] = $date;
+    }
 
     public function employee(){
         return $this->belongsTo(Employee::class);

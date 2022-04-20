@@ -7,12 +7,12 @@
     @csrf
     <div>
         <div class="name mb-2">
-            <label class="form-label" for="name">Désignation du véhicule</label>
+            <label class="form-label" for="name">Désignation</label>
             <input class="form-control @if($errors->has('name')) is-invalid @endif" type="text" name="name" id="name" value="{{ old('name') }}" required>
             <p class="text-danger">{{ $errors->first('name') }}</p>
         </div>
         <div class="brand">
-            <label for="brand">Marque du véhicule</label>
+            <label for="brand">Marque</label>
             <select class="form-select @if ($errors->has('brand')) is-invalid @endif" name="brand" id="brand" required>
                 @foreach($brands as $key => $brand)
                     <option value="{{ $key }}" @if (old('brand') == $key) selected @endif >{{ $brand }}</option>
@@ -21,22 +21,22 @@
             <p class="text-danger">{{ $errors->first('brand') }}</p>
         </div>
         <div class="model mb-2">
-            <label for="model">Model du véhicule</label>
+            <label for="model">Modèle</label>
             <input class="form-control @if($errors->has('model')) is-invalid @endif" type="text" name="model" id="model" value="{{ old('model') }}" required>
             <p class="text-danger">{{ $errors->first('model') }}</p>
         </div>
         <div class="registration mb-2">
-            <label for="registration">Immatriculation du véhicule</label>
+            <label for="registration">Immatriculation</label>
             <input class="form-control @if($errors->has('registration')) is-invalid @endif" type="text" name="registration" id="registration" value="{{ old('registration') }}" required>
             <p class="text-danger">{{ $errors->first('registration') }}</p>
         </div>
         <div class="kilometer mb-2">
-            <label for="kilometer">Kilométrage du véhicule</label>
+            <label for="kilometer">Kilométrage</label>
             <input class="form-control @if($errors->has('kilometer')) is-invalid @endif" type="number" name="kilometer" id="kilometer" value="{{ old('kilometer') }}" required>
             <p class="text-danger">{{ $errors->first('kilometer') }}</p>
         </div>
         <div class="year_of_manufacture mb-2">
-            <label for="year_of_manufacture">Année d'acquisition du véhicule</label>
+            <label for="year_of_manufacture">Année d'acquisition</label>
             <input class="form-control @if($errors->has('year_of_manufacture')) is-invalid @endif" type="number" name="year_of_manufacture" id="year_of_manufacture" value="{{ old('year_of_manufacture') }}" required >
             <p class="text-danger">{{ $errors->first('year_of_manufacture') }}</p>
         </div>
@@ -46,11 +46,11 @@
             <p class="text-danger">{{ $errors->first('date_of_establishment') }}</p>
         </div>
         <div class="employee mb-2">
-            <label for="employee_id">Salarié en charge du véhicule</label>
+            <label for="employee_id">Affectation du salarié</label>
             <select class="form-select @if($errors->has('employee_id')) is-invalid @endif" name="employee_id" id="employee_id" >
                 <option value="">Ne pas affecter</option>
                 @foreach($employees as $employee)
-                    <option value="{{ $employee->id }}" @if($employee->id == old('employee_id')) selected @endif >{{ $employee->name }}</option>
+                    <option value="{{ $employee->id }}" @if($employee->id == old('employee_id')) selected @endif >{{ $employee->full_name }}</option>
                 @endforeach
             </select>
             <p class="text-danger">{{ $errors->first('employee_id') }}</p>

@@ -2066,6 +2066,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //require
 
 $(function () {
   $('.datepicker').datepicker({
+    format: 'dd/mm/yyyy',
     clearBtn: true,
     autoclose: true
   });

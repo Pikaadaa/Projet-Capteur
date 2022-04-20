@@ -15,8 +15,8 @@
                     <th scope="col">Kilométrage</th>
                     <th scope="col">Année d’acquisition</th>
                     <th scope="col">Date de première mise en circulation</th>
-                    <th scope="col">Salarié responsable du véhicule</th>
-                    <th scope="col">Bouton</th>
+                    <th scope="col">Salarié affecté</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,21 +24,23 @@
                     <tr>
                         <th scope="row"><a class="text-black text-decoration-none" href='{{ route('vehicles.show',['vehicle' => $vehicle]) }}'>{{ $vehicle->id }}</a></th>
                         <td>{{ $vehicle->name }}</td>
-                        <td>{{ $brands[$vehicle->brand] }}</td>
+                        <td>{{ $vehicle->brand_name }}</td>
                         <td>{{ $vehicle->model }}</td>
                         <td>{{ $vehicle->registration }}</td>
                         <td>{{ $vehicle->kilometer }}</td>     
                         <td>{{ $vehicle->year_of_manufacture }}</td>               
                         <td>{{ $vehicle->date_of_establishment->format('d/m/Y') }}</td>
-                        @if($vehicle->employee)
-                            <td>{{$vehicle->employee->name}}</td>
-                        @else
-                            <td>Aucun</td>
-                        @endif
                         <td>
-                            <form action="{{ route('vehicles.destroy',['vehicle' => $vehicle]) }}" method="POST">
+                        @if($vehicle->employee)
+                            {{$vehicle->employee->full_name}}
+                        @else
+                            Aucun
+                        @endif
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" href="{{ route('vehicles.edit',['vehicle' => $vehicle]) }}">Modifier</a>
+                            <form action="{{ route('vehicles.destroy',['vehicle' => $vehicle]) }}" class="d-inline-block" method="POST">
                                 @csrf
-                                <a class="btn btn-primary" href="{{ route('vehicles.edit',['vehicle' => $vehicle]) }}">Modifier</a>
                                 @method('delete')
                                 <button class="bg-danger btn btn-danger" type="submit">Supprimer</button>
                             </form>

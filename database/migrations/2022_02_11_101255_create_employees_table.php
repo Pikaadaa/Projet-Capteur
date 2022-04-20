@@ -15,10 +15,10 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('function');
-            $table->foreignId('user_id')->referances('id')->on('users')->nullable();
-            $table->foreignId('mission_id')->referances('id')->on('missions')->nullable();
+            $table->dateTime('birthday_at')->nullable();
             $table->timestamps();
         });
     }

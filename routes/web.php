@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,16 +14,22 @@ use App\Http\Controllers\VehicleController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware(['auth'])->group(function () {
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware(['auth'])->name('accueil');
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('accueil');
+    
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+    
+    Route::resource('vehicles', VehicleController::class);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    Route::resource('employees', EmployeeController::class);
+});
 
-Route::resource('vehicles', VehicleController::class);
+
 
 require __DIR__.'/auth.php';
     

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Mission;
 use App\Models\Vehicle;
@@ -12,15 +13,21 @@ class Employee extends Model
 {
     use HasFactory;
 
-    public function mission(){
-        return $this->belongsTo(Mission::class);
+    protected $fillable =['first_name','last_name','function','birthday_at'];
+
+    protected $dates=['birthday_at'];
+
+    public function setBirthdayAtAttribute($value){
+        $date = Carbon::CreateFromFormat('d/m/Y', $value);
+        $this->attributes['birthday_at'] = $date;
+    }
+
+    public function getFullnameAttribute(){
+        return $this->first_name . ' '. $this->last_name;
     }
 
     public function vehicles(){
         return $this->hasMany(Vehicle::class);
     }
 
-    public function user(){
-        return $this->hasOne(User::class);
-    }
 }

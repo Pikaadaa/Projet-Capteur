@@ -21,7 +21,7 @@ class CreateVehiclesTable extends Migration
             $table->string('registration');
             $table->integer('kilometer');
             $table->integer('year_of_manufacture')->nullable();
-            $table->dateTime('date_of_establishment');
+            $table->dateTime('date_of_establishment')->nullable();
             //$table->foreignId('captur_id')->referances('id')->on('capturs');
             //$table->foreignId('mission_id')->referances('id')->on('missions');
             $table->foreignId('employee_id')->referances('id')->on('employees')->nullable();
