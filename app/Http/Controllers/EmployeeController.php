@@ -28,13 +28,10 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
-        $employees = Employee::all();
-
-        return view('employees.create',[
-            'employees'=> $employees,
-        ]);
+        return view('employees.create');
     }
 
     /**
@@ -43,11 +40,12 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(StoreEmployeeRequest $request)
     {
         Employee::create($request->all()); 
 
-        return redirect()->route('employees.index');
+        return redirect()->route('employees.index')->with('message', 'Employé enregistré!');
     }
 
     /**
@@ -56,6 +54,7 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show(Employee $employee)
     {
         return view("employees.show", [
@@ -69,6 +68,7 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit(Employee $employee)
     {
 
@@ -84,11 +84,12 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
         $employee->update($request->all());
 
-        return redirect()->route('employees.index');
+        return redirect()->route('employees.index')->with('message', 'Employé modifié !');
     }
 
     /**
@@ -97,10 +98,11 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
     public function destroy(Employee $employee)
     {
         $employee->delete();
         
-        return redirect()->route('employees.index');
+        return redirect()->route('employees.index')->with('message', 'Employé supprimé!');
     }
 }

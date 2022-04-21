@@ -20,6 +20,7 @@ class CreateEmployeesTable extends Migration
             $table->string('function');
             $table->dateTime('birthday_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

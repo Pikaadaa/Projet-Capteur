@@ -3,24 +3,38 @@
 @section('content')
     <h1 class="h1">Liste des employés</h1>
     <button class="btn btn-success "><a class="text-white text-decoration-none" href="{{ route('employees.create') }}">Ajouter</a></button>
+
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+
     @if ($employees->count() > 0 )
         <table class="text-center table table-striped">
             <thead>
                 <tr>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>                    
+                    <th scope="col">#</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Fonction</th>
+                    <th scope="col">Date d'anniverssaire</th>
+                    <th scope="col">Actions</th>                    
                 </tr>
             </thead>
+
             <tbody>
                 @foreach($employees as $employee)
                     <tr>
                         <th scope="row"><a class="text-black text-decoration-none" href='{{ route('employees.show',['employee' => $employee]) }}'>{{ $employee->id }}</a></th>
                         <td>{{ $employee->full_name }}</td>
                         <td>{{ $employee->function }}</td>
-                        <td>{{ $employee->birthday_at->format('d/m/Y') }}</td>
+                        <td>
+                            @if($employee->birthday_at != null )
+                                {{ $employee->birthday_at->format('d/m/Y') }}
+                            @else
+                                Aucune date renseignée
+                            @endif
+                        </td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('employees.edit',['employee' => $employee]) }}">Modifier</a>
                             <form action="{{ route('employees.destroy',['employee' => $employee]) }}" class="d-inline-block" method="POST">

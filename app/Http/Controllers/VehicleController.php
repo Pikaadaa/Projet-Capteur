@@ -39,7 +39,7 @@ class VehicleController extends Controller
 
         Vehicle::create($request->all()); 
 
-        return redirect()->route('vehicles.index');
+        return redirect()->route('vehicles.index')->with('message', 'Véhicule enregistré!');
     }
 
     public function show(Vehicle $vehicle){
@@ -65,14 +65,14 @@ class VehicleController extends Controller
 
         $vehicle->update($request->all());
 
-        return redirect()->route('vehicles.index');
+        return redirect()->route('vehicles.index')->with('message', 'Véhicule modifié!');
     }
 
     public function destroy(Vehicle $vehicle){
 
         $vehicle->delete();
 
-        return redirect()->route('vehicles.index');
+        return redirect()->route('vehicles.index')->with('message', 'Véhicule supprimé!');
     }
 }
 
