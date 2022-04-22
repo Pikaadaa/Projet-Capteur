@@ -14,9 +14,9 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $employees = Employee::orderBy('id')->get();
+        $employees = Employee::orderBy('last_name')->paginate(5);
 
         return view('employees.index',[
             'employees'=> $employees,

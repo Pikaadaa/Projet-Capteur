@@ -15,7 +15,7 @@ class VehicleController extends Controller
 
     public function index(){
 
-        $vehicles = Vehicle::orderBy('id')->get();
+        $vehicles = Vehicle::orderBy('id')->paginate(5);
         $brands = Vehicle::brands();
 
         return view('vehicles.index',[
