@@ -45,7 +45,7 @@ class EmployeeController extends Controller
     {
         Employee::create($request->all()); 
 
-        return redirect()->route('employees.index')->with('message', 'Employé enregistré!');
+        return redirect()->route('employees.index')->with('message', 'Employé enregistré !');
     }
 
     /**
@@ -103,6 +103,6 @@ class EmployeeController extends Controller
     {
         $employee->delete();
         
-        return redirect()->route('employees.index')->with('message', 'Employé supprimé!');
+        return redirect()->route('employees.index')->with('message', 'Employé supprimé !');
     }
 }

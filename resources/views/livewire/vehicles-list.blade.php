@@ -5,18 +5,29 @@
 
             <p class="h4 col-auto">Trier</p>
 
-            <div class="col-auto name">
+            <div class="col-md-4 mr-auto w-auto">
                 <label for="registration" class="sr-only"></label>
                 <input class="w-auto form-control d-inline-block" wire:model="registration" id="registration" name="registration" type="text" placeholder="Immatriculation">
             </div>
 
-            <div class="col-auto function">
+            <div class="col-md-4 mr-auto w-auto">
                 <label for="brand" class="sr-only"></label>
-                <select class="w-auto form-control d-inline-block" wire:model="brand" id="brand" name="brand" type="text" placeholder="Marque">
+                <select class="w-auto form-select d-inline-block" wire:model.lazy="brand" id="brand" name="brand" type="text">
+                    <option value="">Toutes les marques</option>
                     <option value="1">Renault</option>
                     <option value="2">Toyota</option>
                     <option value="3">Peugeot</option>
                 </select>
+            </div>
+
+            <div class="col-md-4 ml-auto w-auto">
+                <label for="perPage" class="sr-only"></label>
+                <select class="w-auto form-select d-inline-block" wire:model.lazy="perPage" id="perPage" name="perPage" type="text">
+                    @for($i=5; $i <=20; $i += 5)
+                        <option value="{{ $i }}">{{ $i }}</option>
+                    @endfor
+                </select>
+                <p class="d-inline-block">Résultats par pages</p>
             </div>
             
         </div>
@@ -70,10 +81,10 @@
     </table>
 
     <div class='pagination'>
-        {{ $vehicles->onEachSide(2)->links() }}
+        {{ $vehicles->links() }}
     </div>
 
     @else
-        <span>Aucun véhicule enregistré</span>
+        <span>Aucun véhicule trouvé</span>
     @endif
 </div>

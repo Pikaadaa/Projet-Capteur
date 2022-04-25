@@ -1,17 +1,28 @@
+
 <div>
     <div class="mt-6 mb-2 container-fluid-sm">
         <div class="row">
 
             <p class="h4 col-auto">Trier</p>
 
-            <div class="col-auto name">
+            <div class="col-auto name w-auto">
                 <label for="name" class="sr-only"></label>
                 <input class="w-auto form-control d-inline-block" wire:model="name" id="name" name="name" type="text" placeholder="Nom">
             </div>
 
-            <div class="col-auto function">
+            <div class="col-auto function w-auto">
                 <label for="function" class="sr-only"></label>
                 <input class="w-auto form-control d-inline-block" wire:model="function" id="function" name="function" type="text" placeholder="Fonction">
+            </div>
+
+            <div class="col-md-4 ml-auto w-auto">
+                <label for="perPage" class="sr-only"></label>
+                <select class="w-auto form-select d-inline-block" wire:model.lazy="perPage" id="perPage" name="perPage" type="text">
+                    @for($i=5; $i <=20; $i += 5)
+                        <option value="{{ $i }}">{{ $i }}</option>
+                    @endfor
+                </select>
+                <p class="d-inline-block">Résultats par pages</p>
             </div>
             
         </div>
@@ -59,7 +70,7 @@
     @endif
 
     <div class="pagination">
-        {{ $employees->onEachSide(2)->links() }}
+        {{ $employees->links() }}
     </div>
 
 </div>
