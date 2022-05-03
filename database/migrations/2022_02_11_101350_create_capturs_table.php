@@ -15,9 +15,11 @@ class CreateCaptursTable extends Migration
     {
         Schema::create('capturs', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('date_of_establishment');
-            $table->foreignId('vehicle_id')->referances('id')->on('vehicles');
+            $table->string('device');
+            $table->dateTime('date_of_establishment')->nullable();
+            $table->foreignId('vehicle_id')->referances('id')->on('vehicles')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

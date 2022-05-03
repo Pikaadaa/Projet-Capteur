@@ -6,6 +6,7 @@ use App\Models\Vehicle;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Http;
 use App\Http\Requests\Vehicles\StoreVehicleRequest;
 use App\Http\Requests\Vehicles\UpdateVehicleRequest;
 
@@ -15,13 +16,7 @@ class VehicleController extends Controller
 
     public function index(){
 
-        $vehicles = Vehicle::orderBy('id')->paginate(5);
-        $brands = Vehicle::brands();
-
-        return view('vehicles.index',[
-            'vehicles'=> $vehicles,
-            'brands' => $brands
-        ]);
+        return view('vehicles.index');
     }
 
     public function create(){
@@ -30,7 +25,7 @@ class VehicleController extends Controller
         $brands = Vehicle::brands();
 
         return view('vehicles.create',[
-            'employees'=> $employees,
+            'employees' => $employees,
             'brands' => $brands
         ]);
     }
@@ -39,13 +34,13 @@ class VehicleController extends Controller
 
         Vehicle::create($request->all()); 
 
-        return redirect()->route('vehicles.index')->with('message', 'Véhicule enregistré!');
+        return redirect()->route('vehicles.index')->with('success', 'Véhicule enregistré !');
     }
 
     public function show(Vehicle $vehicle){
 
         return view("vehicles.show", [
-            'vehicle'=>$vehicle,
+            'vehicle' => $vehicle,
         ]);
     }
 
@@ -55,8 +50,8 @@ class VehicleController extends Controller
         $brands = Vehicle::brands();
 
         return view('vehicles.edit', [
-            'vehicle'=>$vehicle,
-            'employees'=>$employees,
+            'vehicle' => $vehicle,
+            'employees' => $employees,
             'brands' => $brands
         ]);
     }
@@ -65,14 +60,14 @@ class VehicleController extends Controller
 
         $vehicle->update($request->all());
 
-        return redirect()->route('vehicles.index')->with('message', 'Véhicule modifié!');
+        return redirect()->route('vehicles.index')->with('success', 'Véhicule modifié !');
     }
 
     public function destroy(Vehicle $vehicle){
 
         $vehicle->delete();
 
-        return redirect()->route('vehicles.index')->with('message', 'Véhicule supprimé!');
+        return redirect()->route('vehicles.index')->with('success', 'Véhicule supprimé !');
     }
 }
 

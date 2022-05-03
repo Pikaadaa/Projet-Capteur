@@ -15,9 +15,10 @@ class CreateLocationsTable extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('date');
-            $table->char('location');
-            $table->foreignId('captur_id')->referances('id')->on('capturs');
+            $table->dateTime('date')->nullable();
+            $table->double('latitude');
+            $table->double('longitude');
+            $table->foreignId('captur_id')->referances('id')->on('capturs')->nullable();
             $table->timestamps();
         });
     }

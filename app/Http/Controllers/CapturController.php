@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
+use App\Models\Captur;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Cornford\Googlmapper\Mapper;
 use Illuminate\Support\Facades\Http;
-use App\Http\Requests\Employees\StoreEmployeeRequest;
-use App\Http\Requests\Employees\UpdateEmployeeRequest;
 
-class EmployeeController extends Controller
+class CapturController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
 
-        return view('employees.index');
+    public function index()
+    {
+        return view('capturs.index');
     }
 
     /**
@@ -26,10 +26,13 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function create()
     {
-        return view('employees.create');
+        $vehicles = Vehicle::all();
+
+        return view('capturs.create',[
+            'vehicles' => $vehicles
+        ]);
     }
 
     /**
@@ -38,12 +41,11 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-    public function store(StoreEmployeeRequest $request)
+    public function store(Request $request)
     {
-        Employee::create($request->all()); 
+        Captur::create($request->all()); 
 
-        return redirect()->route('employees.index')->with('success', 'Employé enregistré !');
+        return redirect()->route('capturs.index')->with('success', 'Capteur enregistré !');
     }
 
     /**
@@ -52,11 +54,10 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function show(Employee $employee)
+    public function show(Captur $captur)
     {
-        return view("employees.show", [
-            'employee' => $employee,
+        return view("capturs.show", [
+            'captur' => $captur,
         ]);
     }
 
@@ -66,13 +67,9 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function edit(Employee $employee)
+    public function edit(Captur $captur)
     {
-
-        return view('employees.edit', [
-            'employee' => $employee,
-        ]);
+        
     }
 
     /**
@@ -82,12 +79,11 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function update(UpdateEmployeeRequest $request, Employee $employee)
+    public function update(Request $request, Captur $captur)
     {
-        $employee->update($request->all());
+        $captur->update($request->all());
 
-        return redirect()->route('employees.index')->with('success', 'Employé modifié !');
+        return redirect()->route('capturs.index')->with('success', 'Capteur modifié !');
     }
 
     /**
@@ -96,11 +92,10 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
-    public function destroy(Employee $employee)
+    public function destroy(Captur $captur)
     {
-        $employee->delete();
-        
-        return redirect()->route('employees.index')->with('success', 'Employé supprimé !');
+        $captur ->delete();
+
+        return redirect()->route('capturs.index')->with('success', 'Capteur supprimé !');
     }
 }

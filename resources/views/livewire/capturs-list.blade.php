@@ -1,18 +1,12 @@
-
 <div>
     <div class="mt-5 mb-4 container-fluid">
         <div class="w-auto row">
 
             <p class="h4 col-auto">Filtrer</p>
 
-            <div class="col-auto name w-auto">
-                <label for="name" class="sr-only"></label>
-                <input class="w-auto form-control d-inline-block" wire:model="name" id="name" name="name" type="text" placeholder="Nom">
-            </div>
-
-            <div class="col-auto function w-auto">
-                <label for="function" class="sr-only"></label>
-                <input class="w-auto form-control d-inline-block" wire:model="function" id="function" name="function" type="text" placeholder="Fonction">
+            <div class="col-auto device w-auto">
+                <label for="device" class="sr-only"></label>
+                <input class="w-auto form-control d-inline-block" wire:model="device" id="device" name="device" type="text" placeholder="Clé de l'appareil">
             </div>
 
             <div class="col-md-4 ml-auto w-auto">
@@ -27,34 +21,36 @@
         </div>
     </div>
 
-    @if ($employees->count() > 0 )
+    @if ($capturs->count() > 0 )
         <table class="text-center table table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Fonction</th>
-                    <th scope="col">Date d'anniverssaire</th>
+                    <th scope="col">Device</th>
+                    <th scope="col">Immatriculation du véhicule</th>
+                    <th scope="col">Etat</th>
+                    <th scope="col">Batterie</th>
                     <th scope="col">Actions</th>                    
                 </tr>
             </thead>
 
             <tbody>
-                @foreach($employees as $employee)
+                @foreach($capturs as $captur)
                     <tr>
-                        <th scope="row"><a class="text-black text-decoration-none" href='{{ route('employees.show',['employee' => $employee]) }}'>{{ $employee->id }}</a></th>
-                        <td>{{ $employee->full_name }}</td>
-                        <td>{{ $employee->function }}</td>
+                        <th :capturs="{{$capturs}}" scope="row"><a class="text-black text-decoration-none" href='{{ route('capturs.show',['captur' => $captur]) }}'>{{ $captur->id }}</a></th>
+                        <td>{{ $captur->device }}</td>
                         <td>
-                            @if($employee->birthday_at != null )
-                                {{ $employee->birthday_at->format('d/m/Y') }}
+                            @if($captur->vehicle != null )
+                                {{ $captur->vehicle->registration }}
                             @else
-                                Aucune date renseignée
+                                Aucune voiture assignée
                             @endif
                         </td>
+                        <td></td>
+                        <td></td>
                         <td>
-                            <a class="btn btn-primary" href="{{ route('employees.edit',['employee' => $employee]) }}">Modifier</a>
-                            <form action="{{ route('employees.destroy',['employee' => $employee]) }}" class="d-inline-block" method="POST">
+                            <a class="btn btn-primary" href="{{ route('capturs.edit',['captur' => $captur]) }}">Modifier</a>
+                            <form action="{{ route('capturs.destroy',['captur' => $captur]) }}" class="d-inline-block" method="POST">
                                 @csrf
                                 @method('delete')
                                 <button class="bg-danger btn btn-danger" type="submit">Supprimer</button>
@@ -66,12 +62,11 @@
         </table>
     @else
         <div class="mt-5 d-flex justify-content-center align-self-center">
-            <span class="h2">Aucun employé trouvé</span>
+            <span class="h2">Aucun capteur trouvé</span>
         </div>
     @endif
 
     <div class="pagination">
-        {{ $employees->links() }}
+        {{ $capturs->links() }}
     </div>
-
 </div>

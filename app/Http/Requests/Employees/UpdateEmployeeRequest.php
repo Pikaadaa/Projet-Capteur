@@ -27,7 +27,7 @@ class UpdateEmployeeRequest extends FormRequest
             'first_name' => 'required','string',
             'last_name' => 'required','string',
             'function' => 'required','string',
-            'birthday_at' => 'required','date_format:"d-m-Y"'
+            'birthday_at' => 'nullable','date_format:"d-m-Y"'
         ];
     }
 
@@ -40,7 +40,6 @@ class UpdateEmployeeRequest extends FormRequest
             'last_name.string' => "Veuillez renseignez un nom valide.",
             'function.required' => "Veuillez renseignez une fonction.",
             'function.string' => "Veuillez renseignez une fonction valide.",
-            'bithday_at.required' => "Veuillez renseignez une date",
             'bithday_at.date_format:"d-m-Y"' => "Veuillez renseignez une date au format(j/m/aaaa)"
         ];
     }

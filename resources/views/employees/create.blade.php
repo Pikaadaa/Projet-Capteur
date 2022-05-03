@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="h1">Ajouter un employés</h1>
+<h1 class="h1">Ajouter un employé</h1>
 <button class="btn btn-danger"><a class="text-white text-decoration-none" href="{{ route('employees.index')}}">Annuler</a></button>
 <form method="POST" action="{{ route('employees.store') }}">
     @csrf

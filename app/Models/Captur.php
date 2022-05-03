@@ -5,14 +5,19 @@ namespace App\Models;
 use App\Models\Vehicle;
 use App\Models\Location;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Captur extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $fillable =['device','vehicle_id'];
+
+    protected $dates=['date_of_establishment'];
 
     public function vehicle(){
-        return $this->hasOne(Vehicle::class);
+        return $this->belongsTo(Vehicle::class);
     }
 
     public function locations(){

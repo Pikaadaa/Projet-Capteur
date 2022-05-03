@@ -12,6 +12,8 @@ class VehiclesList extends Component
 
     use WithPagination;
 
+    protected $paginationTheme = 'bootstrap';
+
     public $registration;
     public $brand;
     public $perPage = 5;
@@ -19,17 +21,16 @@ class VehiclesList extends Component
     public function render()
     {
 
+        $query = Vehicle::where('registration', 'like', '%'. $this->registration .'%');
+
         if($this->brand != null){
-            return view('livewire.vehicles-list', [
-                'vehicles' => Vehicle::where('registration', 'like', '%'. $this->registration .'%')->where('brand', '=', $this->brand)->paginate($this->perPage)
-            ]);
-        }else{
-            return view('livewire.vehicles-list', [
-                'vehicles' => Vehicle::where('registration', 'like', '%'. $this->registration .'%')->paginate($this->perPage)
-            ]);
+            $query->where('brand', '=', $this->brand);
         }
 
-        
+        $query = $query->paginate($this->perPage);
 
+        return view('livewire.vehicles-list', [
+            'vehicles' => $query 
+        ]);
     }
 }

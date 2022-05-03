@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
+use App\Models\Captur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use App\Http\Requests\Employees\StoreEmployeeRequest;
-use App\Http\Requests\Employees\UpdateEmployeeRequest;
 
-class EmployeeController extends Controller
+class MapController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
+        $capturs = Captur::all();
 
-        return view('employees.index');
+        return view('maps.index', [
+            'capturs' => $capturs
+        ]);
     }
 
     /**
@@ -26,10 +27,9 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function create()
     {
-        return view('employees.create');
+        //
     }
 
     /**
@@ -38,12 +38,9 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-    public function store(StoreEmployeeRequest $request)
+    public function store(Request $request)
     {
-        Employee::create($request->all()); 
-
-        return redirect()->route('employees.index')->with('success', 'Employé enregistré !');
+        //
     }
 
     /**
@@ -52,12 +49,9 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function show(Employee $employee)
+    public function show($id)
     {
-        return view("employees.show", [
-            'employee' => $employee,
-        ]);
+        //
     }
 
     /**
@@ -66,13 +60,9 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function edit(Employee $employee)
+    public function edit($id)
     {
-
-        return view('employees.edit', [
-            'employee' => $employee,
-        ]);
+        //
     }
 
     /**
@@ -82,12 +72,9 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function update(UpdateEmployeeRequest $request, Employee $employee)
+    public function update(Request $request, $id)
     {
-        $employee->update($request->all());
-
-        return redirect()->route('employees.index')->with('success', 'Employé modifié !');
+        //
     }
 
     /**
@@ -96,11 +83,8 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
-    public function destroy(Employee $employee)
+    public function destroy($id)
     {
-        $employee->delete();
-        
-        return redirect()->route('employees.index')->with('success', 'Employé supprimé !');
+        //
     }
 }

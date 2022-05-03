@@ -27,7 +27,7 @@
 
             <div class="date birthday_at mb-2">
                 <label for="birthday_at">Date d'anniverssaire</label>
-                <input class="datepicker form-control @if($errors->has('birthday_at')) is-invalid @endif" type="text" name="birthday_at" id="birthday_at" value="{{ old('birthday_at', $employee->birthday_at->format('d/m/Y')) }}">
+                <input class="datepicker form-control @if($errors->has('birthday_at')) is-invalid @endif" type="text" name="birthday_at" id="birthday_at" value="{{ old('birthday_at', $employee->birthday_at != null ? $employee->birthday_at->format('d/m/Y') : '' ) }}">
                 <p class="text-danger">{{ $errors->first('birthday_at') }}</p>
             </div>
             

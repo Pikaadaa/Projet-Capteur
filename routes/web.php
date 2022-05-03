@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MapController;
+use App\Http\Controllers\CapturController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\EmployeeController;
 
@@ -27,6 +29,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('vehicles', VehicleController::class);
 
     Route::resource('employees', EmployeeController::class);
+
+    Route::resource('capturs', CapturController::class);
+
+    Route::resource('maps', MapController::class);
 });
 
 

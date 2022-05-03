@@ -52,7 +52,7 @@ class Vehicle extends Model
     }
 
     public function captur(){
-        return $this->belongsTo(Captur::class);
+        return $this->hasOne(Captur::class);
     }
 
 }
