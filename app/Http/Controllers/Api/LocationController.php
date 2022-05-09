@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class LocationController extends Controller
@@ -15,9 +16,14 @@ class LocationController extends Controller
      */
     public function index()
     {
-        $locations = Location::all();
+        $locations = DB::table('locations')->select(DB::raw('captur_id'))->groupBy('captur_id')->get();
 
-        return $locations;
+        $taille = count($locations);
+        for($i = 0 ; $i <= $taille-1 ; $i++){
+            $location[$i] = Location::orderBy('created_at', 'desc')->where('captur_id', '=', $locations[$i]->captur_id)->first();
+        }
+
+        return $location;
     }
 
     /**
@@ -28,7 +34,7 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

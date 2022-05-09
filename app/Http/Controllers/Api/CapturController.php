@@ -16,13 +16,7 @@ class CapturController extends Controller
      */
     public function index()
     {
-        $capturs = Captur::all();
-
-        foreach($capturs as $captur){
-            $position = Http::get('https://api.capturs.com/device/'. $captur->device .'/position/limit/1?login=DzSaFKtfJhWY73qpI2mC94888QU2&password=228E7F9CED1DEDBE')->json();
-        }
-
-        return $position;
+        
     }
 
     /**

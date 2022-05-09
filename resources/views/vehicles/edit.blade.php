@@ -46,6 +46,15 @@
                 <input class="datepicker form-control @if($errors->has('date_of_establishment')) is-invalid @endif" type="text" name="date_of_establishment" value="{{ old('date_of_establishment', $vehicle->date_of_establishment->format('d/m/Y')) }}" required >
                 <p class="text-danger">{{ $errors->first('date_of_establishment') }}</p>
             </div>
+            <div class="captur_id mb-2">
+                <label for="captur_id">Affectation du capteur</label>
+                <select class="form-select @if($errors->has('captur_id')) is-invalid @endif" name="captur_id" id="captur_id">
+                    <option value="">Ne pas affecter</option>
+                    @foreach($capturs as $captur)
+                        <option value="{{ $captur->id }}" @if($captur->id == old('captur_id',$vehicle->captur_id)) selected @endif )>{{ $captur->device }}</option>
+                    @endforeach                             
+                </select>
+                <p class="text-danger">{{ $errors->first('captur_id') }}</p>
             <div class="employee mb-2">
                 <label for="employee_id">Affectation du salarié</label>
                 <select class="form-select @if($errors->has('employee_id')) is-invalid @endif" name="employee_id" id="employee_id">

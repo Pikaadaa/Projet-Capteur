@@ -7,6 +7,8 @@ use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Cornford\Googlmapper\Mapper;
 use Illuminate\Support\Facades\Http;
+use App\Http\Requests\Capturs\StoreCapturRequest;
+use App\Http\Requests\Capturs\UpdateCapturRequest;
 
 class CapturController extends Controller
 {
@@ -45,6 +47,14 @@ class CapturController extends Controller
     {
         Captur::create($request->all()); 
 
+        $captur = Captur::where('device', 'like', $request->device)->get();
+
+        if (Vehicle::count('id') > 0 ){
+            Vehicle::where('id' ,'=', $request->vehicle_id)->update([
+                'captur_id' => $captur[0]->id
+            ]);
+        }
+
         return redirect()->route('capturs.index')->with('success', 'Capteur enregistré !');
     }
 
@@ -69,7 +79,12 @@ class CapturController extends Controller
      */
     public function edit(Captur $captur)
     {
-        
+        $vehicles = Vehicle::all();
+
+        return view('capturs.edit', [
+            'captur' => $captur,
+            'vehicles' => $vehicles
+        ]);
     }
 
     /**
@@ -82,6 +97,12 @@ class CapturController extends Controller
     public function update(Request $request, Captur $captur)
     {
         $captur->update($request->all());
+
+        $capturs = Captur::where('device', 'like', $request->device)->get();
+
+        Vehicle::where('id' ,'=', $request->captur_id)->update([
+            'captur_id' => $capturs[0]->id
+        ]);
 
         return redirect()->route('capturs.index')->with('success', 'Capteur modifié !');
     }

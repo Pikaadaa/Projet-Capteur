@@ -12,9 +12,8 @@ class Captur extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable =['device','vehicle_id'];
+    protected $fillable =['device','vehicle_id','battery'];
 
-    protected $dates=['date_of_establishment'];
 
     public function vehicle(){
         return $this->belongsTo(Vehicle::class);

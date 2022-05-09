@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Captur;
+use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class MapController extends Controller
@@ -17,6 +19,22 @@ class MapController extends Controller
     {
         $capturs = Captur::all();
 
+        foreach($capturs as $captur){
+            $data = Http::get('https://api.capturs.com/device/'. $captur->device .'/position/limit/1?login=DzSaFKtfJhWY73qpI2mC94888QU2&password=228E7F9CED1DEDBE')->json();
+        }
+
+        if(isset($data['result'])){
+            $result = $data['result']; 
+            for($i = 0 ; $i < $result ; $i++){
+                $captur_id = Captur::where('device' , 'like', $data['position'][$i]['device'])->get();
+                $locations = Location::create([
+                    'latitude' => $data['position'][$i]['latitude'],
+                    'longitude' => $data['position'][$i]['longitude'],
+                    'captur_id' => $captur_id[0]->id
+                ]);
+            }
+        }
+        
         return view('maps.index', [
             'capturs' => $capturs
         ]);

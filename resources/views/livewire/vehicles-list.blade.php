@@ -45,6 +45,7 @@
                     <th scope="col">Kilométrage</th>
                     <th scope="col">Année d’acquisition</th>
                     <th scope="col">Date de première mise en circulation</th>
+                    <th scope="col">Capteur affecté</th>
                     <th scope="col">Salarié affecté</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -60,6 +61,13 @@
                         <td>{{ $vehicle->kilometer }}</td>     
                         <td>{{ $vehicle->year_of_manufacture }}</td>               
                         <td>{{ $vehicle->date_of_establishment->format('d/m/Y') }}</td>
+                        <td>
+                        @if($vehicle->captur)
+                            {{$vehicle->captur->device}}
+                        @else
+                            Aucun
+                        @endif
+                        </td>
                         <td>
                         @if($vehicle->employee)
                             {{$vehicle->employee->full_name}}

@@ -28,7 +28,6 @@
                     <th scope="col">#</th>
                     <th scope="col">Device</th>
                     <th scope="col">Immatriculation du véhicule</th>
-                    <th scope="col">Etat</th>
                     <th scope="col">Batterie</th>
                     <th scope="col">Actions</th>                    
                 </tr>
@@ -37,7 +36,7 @@
             <tbody>
                 @foreach($capturs as $captur)
                     <tr>
-                        <th :capturs="{{$capturs}}" scope="row"><a class="text-black text-decoration-none" href='{{ route('capturs.show',['captur' => $captur]) }}'>{{ $captur->id }}</a></th>
+                        <th scope="row"><a class="text-black text-decoration-none" href='{{ route('capturs.show',['captur' => $captur]) }}'>{{ $captur->id }}</a></th>
                         <td>{{ $captur->device }}</td>
                         <td>
                             @if($captur->vehicle != null )
@@ -46,8 +45,7 @@
                                 Aucune voiture assignée
                             @endif
                         </td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ $captur->battery }}</td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('capturs.edit',['captur' => $captur]) }}">Modifier</a>
                             <form action="{{ route('capturs.destroy',['captur' => $captur]) }}" class="d-inline-block" method="POST">

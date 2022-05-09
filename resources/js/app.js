@@ -13,6 +13,8 @@ $(function () {
 
 window.onload = function () {
 
+    // Map de la carte
+
     var map = L.map('map').setView([50.987242, 2.128793], 16);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -23,7 +25,6 @@ window.onload = function () {
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoicGlrYWRhYSIsImEiOiJjbDJrOGkwa2gwMHlpM2NtdW5zeDNuOG81In0.sCA9Fv3WUC25GWLJcZxTvw'
     }).addTo(map);
-
 
     fetch("http://capturs.test/api/locations").then(response => response.json()).then(response => {
         for (var i = 0; i < response['length']; i++) {
