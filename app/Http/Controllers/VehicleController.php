@@ -35,8 +35,10 @@ class VehicleController extends Controller
     public function store(StoreVehicleRequest $request){
 
         Vehicle::create($request->all());
+
+        $vehicle = Vehicle::where('registration', $request->registration)->first();
  
-        return redirect()->route('vehicles.index')->with('success', 'Véhicule enregistré !');
+        return redirect()->route('vehicles.show',['vehicle' => $vehicle]);
     }
 
     public function show(Vehicle $vehicle){

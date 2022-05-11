@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('map-capturs')
+@section('map')
 <div class="mb-0 parent">
     <div class="mb-0 mt-0 div1 bg-secondary text-white"> 
         <h1 class="pb-5 pt-5 h3 text-center">Liste des capteurs</h1>
@@ -10,9 +10,7 @@
             </div>
         @endforeach
     </div>
-@endsection
 
-@section('map')
     <div class="map mb-0 mt-0 div2" id='map'> 
 
     </div>

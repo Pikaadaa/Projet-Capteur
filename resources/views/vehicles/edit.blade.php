@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
     <h1 class="h1">Modifier le véhicule</h1>
     <a class=" btn btn-danger text-white text-decoration-none" href="{{ route('vehicles.index')}}">Annuler</a>
     <form action="{{ route('vehicles.update', ['vehicle'=> $vehicle]) }}" method="POST">
@@ -61,4 +62,5 @@
             </div>
         </div>
     </form>
+</div>
 @endsection

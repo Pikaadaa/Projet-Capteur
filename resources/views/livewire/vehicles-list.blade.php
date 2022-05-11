@@ -62,15 +62,17 @@
                         <td>{{ $vehicle->year_of_manufacture }}</td>               
                         <td>{{ $vehicle->date_of_establishment->format('d/m/Y') }}</td>
                         <td>
-                        @if(isset($vehicle->capturs->first()->device))
-                            {{$vehicle->capturs->first()->device}}
-                        @else
+                        @if($vehicle->capturs()->count() > 0)
+                            @foreach($vehicle->capturs as $captur)
+                                {{ $captur->device }}
+                            @endforeach
+                        @else   
                             Aucun
                         @endif
                         </td>
                         <td>
                         @if($vehicle->employee)
-                            {{$vehicle->employee->full_name}}
+                            {{ $vehicle->employee->full_name }}
                         @else
                             Aucun
                         @endif

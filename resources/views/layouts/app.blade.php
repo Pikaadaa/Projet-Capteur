@@ -12,14 +12,17 @@
 </head>
 <body>
     @include('partials.navbar')
+    <div class="container">
         @if(session()->has('success'))
-        <div class="mt-2 alert alert-success">
-            {{ session()->get('success') }}
+        <div class="container">
+            <div class="mt-2 alert alert-success">
+                {{ session()->get('success') }}
+            </div>
         </div>
         @endif
         @yield('content')
+    </div>
     <div class="mb-0">
-        @yield('map-capturs')
         @yield('map')
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

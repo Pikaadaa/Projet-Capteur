@@ -14,9 +14,9 @@ class Employee extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable =['first_name','last_name','function','birthday_at'];
+    protected $fillable = ['first_name', 'last_name', 'function', 'birthday_at'];
 
-    protected $dates=['birthday_at'];
+    protected $dates = ['birthday_at'];
 
     public function setBirthdayAtAttribute($value){
         if($value != null){

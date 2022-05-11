@@ -19,24 +19,24 @@ window.onload = function () {
     // Map du véhicule 
 
     if (mapv_auth != null) {
-        var mapv = L.map('mapv').setView([50.987242, 2.128793], 16);
         var chemin = window.location.pathname;
         car = chemin.charAt(chemin.length - 1);
 
-        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox/streets-v11',
-            tileSize: 512,
-            zoomOffset: -1,
-            accessToken: 'pk.eyJ1IjoicGlrYWRhYSIsImEiOiJjbDJrOGkwa2gwMHlpM2NtdW5zeDNuOG81In0.sCA9Fv3WUC25GWLJcZxTvw'
-        }).addTo(mapv);
-
         fetch("http://capturs.test/api/vehicles/" + car).then(response => response.json()).then(response => {
+            var mapv = L.map('mapv').setView([response["latitude"], response["longitude"]], 16);
+
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1,
+                accessToken: 'pk.eyJ1IjoicGlrYWRhYSIsImEiOiJjbDJrOGkwa2gwMHlpM2NtdW5zeDNuOG81In0.sCA9Fv3WUC25GWLJcZxTvw'
+            }).addTo(mapv);
+
             var markerv = L.marker([response["latitude"], response["longitude"]]).addTo(mapv);
             markerv.bindPopup("<b>Position du véhicule</b>").openPopup();
         }).catch(error => alert("Erreur : " + error));
-
 
     }
 

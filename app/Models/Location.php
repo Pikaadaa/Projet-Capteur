@@ -10,7 +10,7 @@ class Location extends Model
 {
     use HasFactory;
 
-    protected $fillable =['latitude','longitude','captur_id'];
+    protected $fillable = ['latitude', 'longitude', 'captur_id'];
 
     public function captur(){
         return $this->belongsTo(Captur::class);

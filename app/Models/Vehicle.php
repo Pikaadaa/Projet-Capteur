@@ -15,9 +15,9 @@ class Vehicle extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable =['name','brand','model','registration','kilometer','year_of_manufacture','date_of_establishment','employee_id','captur_id'];
+    protected $fillable = ['name', 'brand', 'model', 'registration', 'kilometer', 'year_of_manufacture', 'date_of_establishment', 'employee_id'];
 
-    protected $dates=['date_of_establishment'];
+    protected $dates = ['date_of_establishment'];
 
     const BRAND_RENAULT = 1 ;
     const BRAND_TOYOTA = 2 ;
