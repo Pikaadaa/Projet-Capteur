@@ -2073,25 +2073,53 @@ $(function () {
 });
 
 window.onload = function () {
-  // Map de la carte
-  var map = L.map('map').setView([50.987242, 2.128793], 16);
-  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'pk.eyJ1IjoicGlrYWRhYSIsImEiOiJjbDJrOGkwa2gwMHlpM2NtdW5zeDNuOG81In0.sCA9Fv3WUC25GWLJcZxTvw'
-  }).addTo(map);
-  fetch("http://capturs.test/api/locations").then(function (response) {
-    return response.json();
-  }).then(function (response) {
-    for (var i = 0; i < response['length']; i++) {
-      var marker = L.marker([response[i]["latitude"], response[i]["longitude"]]).addTo(map);
-    }
-  })["catch"](function (error) {
-    return alert("Erreur : " + error);
-  });
+  var mapv_auth = document.getElementById('mapv');
+  var map_auth = document.getElementById('map'); // Map du véhicule 
+
+  if (mapv_auth != null) {
+    var mapv = L.map('mapv').setView([50.987242, 2.128793], 16);
+    var chemin = window.location.pathname;
+    car = chemin.charAt(chemin.length - 1);
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+      zoomOffset: -1,
+      accessToken: 'pk.eyJ1IjoicGlrYWRhYSIsImEiOiJjbDJrOGkwa2gwMHlpM2NtdW5zeDNuOG81In0.sCA9Fv3WUC25GWLJcZxTvw'
+    }).addTo(mapv);
+    fetch("http://capturs.test/api/vehicles/" + car).then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      var markerv = L.marker([response["latitude"], response["longitude"]]).addTo(mapv);
+      markerv.bindPopup("<b>Position du véhicule</b>").openPopup();
+    })["catch"](function (error) {
+      return alert("Erreur : " + error);
+    });
+  } // Map de la carte général
+
+
+  if (map_auth != null) {
+    var map = L.map('map').setView([50.987242, 2.128793], 16);
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+      zoomOffset: -1,
+      accessToken: 'pk.eyJ1IjoicGlrYWRhYSIsImEiOiJjbDJrOGkwa2gwMHlpM2NtdW5zeDNuOG81In0.sCA9Fv3WUC25GWLJcZxTvw'
+    }).addTo(map);
+    fetch("http://capturs.test/api/locations").then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      for (var i = 0; i < response['length']; i++) {
+        var marker = L.marker([response[i]["latitude"], response[i]["longitude"]]).addTo(map);
+        marker.bindPopup("<b>Capteur n° " + (i + 1) + "</b>").openPopup();
+      }
+    })["catch"](function (error) {
+      return alert("Erreur : " + error);
+    });
+  }
 };
 
 /***/ }),

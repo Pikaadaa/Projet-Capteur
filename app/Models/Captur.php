@@ -14,7 +14,6 @@ class Captur extends Model
 
     protected $fillable =['device','vehicle_id','battery'];
 
-
     public function vehicle(){
         return $this->belongsTo(Vehicle::class);
     }

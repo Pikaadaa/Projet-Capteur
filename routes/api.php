@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CapturController;
+use App\Http\Controllers\Api\VehicleController;
 use App\Http\Controllers\Api\LocationController;
 
 /*
@@ -23,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('capturs', CapturController::class);
 
 Route::apiResource('locations',LocationController::class);
+
+Route::apiResource('vehicles', VehicleController::class);

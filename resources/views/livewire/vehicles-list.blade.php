@@ -1,5 +1,5 @@
 <div class='container'>
-    <div class="mt-5 mb-4 container-fluid-sm">
+    <div class="mt-5 mb-4">
         <div class="w-auto row">
 
             <p class="h4 col-auto">Trier</p>
@@ -33,7 +33,7 @@
     </div>
 
     @if ($vehicles->count() > 0 )
-    <div class="container">
+    <div class="table-responsive-xl">
         <table class="text-center table table-striped">
             <thead>
                 <tr>
@@ -62,8 +62,8 @@
                         <td>{{ $vehicle->year_of_manufacture }}</td>               
                         <td>{{ $vehicle->date_of_establishment->format('d/m/Y') }}</td>
                         <td>
-                        @if($vehicle->captur)
-                            {{$vehicle->captur->device}}
+                        @if(isset($vehicle->capturs->first()->device))
+                            {{$vehicle->capturs->first()->device}}
                         @else
                             Aucun
                         @endif
@@ -87,12 +87,11 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
 
-    <div class='pagination'>
-        {{ $vehicles->links() }}
+        <div class='pagination'>
+            {{ $vehicles->links() }}
+        </div>
     </div>
-
     @else
         <div class="mt-5 d-flex justify-content-center align-self-center">
             <span class="h2">Aucun véhicule trouvé</span>

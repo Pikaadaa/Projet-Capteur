@@ -1,6 +1,5 @@
-
-<div>
-    <div class="mt-5 mb-4 container-fluid">
+<div class="container">
+    <div class="mt-5 mb-4 container">
         <div class="w-auto row">
 
             <p class="h4 col-auto">Filtrer</p>
@@ -28,6 +27,7 @@
     </div>
 
     @if ($employees->count() > 0 )
+    <div class="table-responsive-xl">
         <table class="text-center table table-striped">
             <thead>
                 <tr>
@@ -64,6 +64,7 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
     @else
         <div class="mt-5 d-flex justify-content-center align-self-center">
             <span class="h2">Aucun employé trouvé</span>

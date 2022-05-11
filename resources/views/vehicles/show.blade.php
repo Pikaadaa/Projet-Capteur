@@ -1,8 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mb-4 mt-4 border border-dark">
-    <p class="text-center h3">{{ $vehicle->name }}</p>
+<div class="container">
+<div class="mb-4 mt-4 bg-gray-200">
+    <div class="row">
+        <div class="col">
+            <p class="text-center h3">{{ $vehicle->name }}</p>
+        </div>
+        
+        <div class="col-auto ml-auto d-inline-block">
+            <a class="mt-2 mb-3 btn btn-primary" href="{{ route('vehicles.edit',['vehicle' => $vehicle]) }}">Modifier</a>
+            <form action="{{ route('vehicles.destroy',['vehicle' => $vehicle]) }}" class="d-inline-block" method="POST">
+                @csrf
+                @method('delete')
+                <button class="mt-2 mb-3 bg-danger btn btn-danger" type="submit">Supprimer</button>
+            </form>
+        </div>
+    </div>
     <div class="d-flex justify-content-around">
         <div>
             <p class="h5 d-inline">Marque :</p>
@@ -34,7 +48,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-around">
-        <div class="">
+        <div class="mb-4">
             <p class="h5 d-inline">Salarié en charge : </p>
             <p class="d-inline">
                 @if($vehicle->employee != null)
@@ -47,30 +61,27 @@
         <div class="">
             <p class="h5 d-inline">Capteur assigné : </p>
             <p class="d-inline">
-            @if($vehicle->captur)
-                {{$vehicle->captur->device}}
+            @if(isset($vehicle->capturs[0]))
+                {{$vehicle->capturs[0]->device}}
             @else
                 Aucun
             @endif
             </p>
         </div>
     </div>
-
-    <div class=text-center>
-        <a class="mt-3 mb-3 btn btn-primary" href="{{ route('vehicles.edit',['vehicle' => $vehicle]) }}">Modifier</a>
-        <form action="{{ route('vehicles.destroy',['vehicle' => $vehicle]) }}" class="d-inline-block" method="POST">
-            @csrf
-            @method('delete')
-            <button class="mt-3 mb-3 bg-danger btn btn-danger" type="submit">Supprimer</button>
-        </form>
-    </div>
-    
 </div>
 
 
-<div class="v" id='map'> 
 
+@if(isset($vehicle->capturs[0]))
+    <div class="v" id='mapv'> 
 
+    </div>
+@else
+    <div class="mt-5 d-flex justify-content-center align-self-center">
+        <span class="h2">Aucun capteur assigné</span>
+    </div>
+@endif
 </div>
 
 @endsection

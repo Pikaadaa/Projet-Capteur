@@ -16,7 +16,6 @@ class VehicleController extends Controller
 
 
     public function index(){
-
         return view('vehicles.index');
     }
 
@@ -36,14 +35,6 @@ class VehicleController extends Controller
     public function store(StoreVehicleRequest $request){
 
         Vehicle::create($request->all());
-
-        $vehicle = Vehicle::where('registration', 'like', $request->registration)->get();
-
-        if (Captur::count('id') > 0 ){
-            Captur::where('id' ,'=', $request->captur_id)->update([
-                'vehicle_id' => $vehicle[0]->id
-            ]);
-        }
  
         return redirect()->route('vehicles.index')->with('success', 'Véhicule enregistré !');
     }
@@ -72,12 +63,6 @@ class VehicleController extends Controller
     public function update(UpdateVehicleRequest $request, Vehicle $vehicle){
 
         $vehicle->update($request->all());
-
-        $vehicles = Vehicle::where('registration', 'like', $request->registration)->get();
-
-        Captur::where('id' ,'=', $request->vehicle_id)->update([
-            'vehicle_id' => $vehicles[0]->id
-        ]);
 
         return redirect()->route('vehicles.index')->with('success', 'Véhicule modifié !');
     }

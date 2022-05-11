@@ -12,14 +12,12 @@
 </head>
 <body>
     @include('partials.navbar')
-    <div class="container mx-auto">
         @if(session()->has('success'))
         <div class="mt-2 alert alert-success">
             {{ session()->get('success') }}
         </div>
         @endif
         @yield('content')
-    </div>
     <div class="mb-0">
         @yield('map-capturs')
         @yield('map')

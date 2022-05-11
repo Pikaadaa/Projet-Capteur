@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Captur;
 use App\Models\Mission;
 use App\Models\Employee;
+use App\Models\Location;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -51,8 +52,12 @@ class Vehicle extends Model
         return $this->belongsTo(Mission::class);
     }
 
-    public function captur(){
-        return $this->hasOne(Captur::class);
+    public function capturs(){
+        return $this->hasMany(Captur::class);
+    }
+
+    public function captursLocations(){
+        return $this->hasManyThrough(Location::class, Captur::class);
     }
 
 }
