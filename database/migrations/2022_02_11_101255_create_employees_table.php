@@ -19,6 +19,7 @@ class CreateEmployeesTable extends Migration
             $table->string('last_name');
             $table->string('function');
             $table->dateTime('birthday_at')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

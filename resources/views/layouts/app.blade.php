@@ -12,7 +12,6 @@
 </head>
 <body>
     @include('partials.navbar')
-    <div class="container">
         @if(session()->has('success'))
         <div class="container">
             <div class="mt-2 alert alert-success">
@@ -21,7 +20,6 @@
         </div>
         @endif
         @yield('content')
-    </div>
     <div class="mb-0">
         @yield('map')
     </div>

@@ -5,7 +5,7 @@
 
 .map {
     margin-top: 0px;
-    height: 943px;
+    height: 900px;
     width: 100%;
 }
 
@@ -26,6 +26,19 @@
 }
 
 .v {
-    height: 650px;
+    height: 615px;
     width: 100%;
+}
+
+.no_err {
+    display: none;
+}
+
+.error_captur {
+    display: block;
+    color: rgb(235, 75, 75);
+}
+
+.balise {
+    cursor: pointer;
 }

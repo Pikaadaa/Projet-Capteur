@@ -15,7 +15,6 @@ class CaptursList extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $device;
-    public $registration ;
     public $perPage = 5 ;
 
 

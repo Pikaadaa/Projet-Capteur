@@ -644,15 +644,21 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mt-3{margin-top:0.75rem}
 
-.mb-0{margin-bottom:0px}
-
-.mt-5{margin-top:1.25rem}
-
-.mt-0{margin-top:0px}
+.mb-3{margin-bottom:0.75rem}
 
 .mr-auto{margin-right:auto}
 
-.mb-3{margin-bottom:0.75rem}
+.mt-5{margin-top:1.25rem}
+
+.mb-0{margin-bottom:0px}
+
+.mr-3{margin-right:0.75rem}
+
+.mr-4{margin-right:1rem}
+
+.mr-2{margin-right:0.5rem}
+
+.mt-0{margin-top:0px}
 
 .block{display:block}
 
@@ -774,9 +780,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pt-5{padding-top:1.25rem}
 
-.pb-4{padding-bottom:1rem}
+.pb-3{padding-bottom:0.75rem}
 
-.pt-4{padding-top:1rem}
+.pt-3{padding-top:0.75rem}
 
 .text-center{text-align:center}
 
@@ -822,8 +828,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .text-indigo-700{--tw-text-opacity:1;color:rgb(67 56 202 / var(--tw-text-opacity))}
 
-.text-black{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity))}
-
 .underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}
 
 .antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
@@ -862,7 +866,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .map {
     margin-top: 0px;
-    height: 943px;
+    height: 900px;
     width: 100%;
 }
 
@@ -883,8 +887,21 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .v {
-    height: 650px;
+    height: 615px;
     width: 100%;
+}
+
+.no_err {
+    display: none;
+}
+
+.error_captur {
+    display: block;
+    color: rgb(235, 75, 75);
+}
+
+.balise {
+    cursor: pointer;
 }
 
 .hover\:border-gray-300:hover{--tw-border-opacity:1;border-color:rgb(209 213 219 / var(--tw-border-opacity))}

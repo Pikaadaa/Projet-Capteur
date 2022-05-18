@@ -33,7 +33,7 @@
     </div>
 
     @if ($vehicles->count() > 0 )
-    <div class="table-responsive-xl">
+    <div class="table-responsive-xl ">
         <table class="text-center table table-striped">
             <thead>
                 <tr>
@@ -53,8 +53,8 @@
             <tbody>
                 @foreach($vehicles as $vehicle)
                     <tr>
-                        <th scope="row"><a class="text-black text-decoration-none" href='{{ route('vehicles.show',['vehicle' => $vehicle]) }}'>{{ $vehicle->id }}</a></th>
-                        <td>{{ $vehicle->name }}</td>
+                        <th scope="row">{{ $vehicle->id }}</th>
+                        <td><a class="text-primary text-decoration-underline" href='{{ route('vehicles.show',['vehicle' => $vehicle]) }}'>{{ $vehicle->name }}</a></td>
                         <td>{{ $vehicle->brand_name }}</td>
                         <td>{{ $vehicle->model }}</td>
                         <td>{{ $vehicle->registration }}</td>

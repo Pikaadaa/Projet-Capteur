@@ -17,8 +17,9 @@ class CreateLocationsTable extends Migration
             $table->id();
             $table->double('latitude');
             $table->double('longitude');
-            $table->foreignId('captur_id')->referances('id')->on('capturs')->nullable();
+            $table->foreignId('captur_id')->referances('id')->on('capturs')->nullable()->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

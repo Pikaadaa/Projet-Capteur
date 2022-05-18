@@ -23,7 +23,7 @@ window.onload = function () {
         car = chemin.charAt(chemin.length - 1);
 
         fetch("http://capturs.test/api/vehicles/" + car).then(response => response.json()).then(response => {
-            var mapv = L.map('mapv').setView([response["latitude"], response["longitude"]], 16);
+            var mapv = L.map('mapv').setView([response['locations'][0]["latitude"], response['locations'][0]["longitude"]], 16);
 
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -34,9 +34,21 @@ window.onload = function () {
                 accessToken: 'pk.eyJ1IjoicGlrYWRhYSIsImEiOiJjbDJrOGkwa2gwMHlpM2NtdW5zeDNuOG81In0.sCA9Fv3WUC25GWLJcZxTvw'
             }).addTo(mapv);
 
-            var markerv = L.marker([response["latitude"], response["longitude"]]).addTo(mapv);
-            markerv.bindPopup("<b>Position du véhicule</b>").openPopup();
-        }).catch(error => alert("Erreur : " + error));
+            for (var i = 0; i < response['locations']['length']; i++) {
+                if (response['locations'][i] != null) {
+                    var marker = L.marker([response['locations'][i]["latitude"], response['locations'][i]["longitude"]]).addTo(mapv);
+                    marker.bindPopup("<b>" + response['vehicles'][i]['device'] + "</b>").openPopup();
+                }
+            }
+            $('.balise').click(function (event) {
+                var id = event.target.id;
+                for (var i = 0; i < response['locations']['length']; i++) {
+                    if (id == response['locations'][i]['captur_id']) {
+                        mapv.setView([response['locations'][i]['latitude'], response['locations'][i]['longitude']], 19);
+                    }
+                }
+            });
+        }).catch(error => alert("Aucune localisation trouvée"));
 
     }
 
@@ -57,11 +69,19 @@ window.onload = function () {
         }).addTo(map);
 
         fetch("http://capturs.test/api/locations").then(response => response.json()).then(response => {
-            for (var i = 0; i < response['length']; i++) {
-                var marker = L.marker([response[i]["latitude"], response[i]["longitude"]]).addTo(map);
-                marker.bindPopup("<b>Capteur n° " + (i + 1) + "</b>").openPopup();
+            for (var i = 0; i < response['locations']['length']; i++) {
+                var marker = L.marker([response['locations'][i]["latitude"], response['locations'][i]["longitude"]]).addTo(map);
+                marker.bindPopup("<b>" + response['capturs'][i]['device'] + "</b>").openPopup();
             }
-        }).catch(error => alert("Erreur : " + error));
+            $('.balise').click(function (event) {
+                var id = event.target.id;
+                for (var i = 0; i < response['locations']['length']; i++) {
+                    if (id == response['locations'][i]['captur_id']) {
+                        map.setView([response['locations'][i]['latitude'], response['locations'][i]['longitude']], 19);
+                    }
+                }
+            });
+        }).catch(error => alert("Aucune localisation trouvée"));
     }
 }
 

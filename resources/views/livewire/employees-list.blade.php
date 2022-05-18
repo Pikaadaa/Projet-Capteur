@@ -42,8 +42,8 @@
             <tbody>
                 @foreach($employees as $employee)
                     <tr>
-                        <th scope="row"><a class="text-black text-decoration-none" href='{{ route('employees.show',['employee' => $employee]) }}'>{{ $employee->id }}</a></th>
-                        <td>{{ $employee->full_name }}</td>
+                        <th scope="row">{{ $employee->id }}</th>
+                        <td><a class="text-primary text-decoration-underline" href='{{ route('employees.show',['employee' => $employee]) }}'>{{ $employee->full_name }}</a></td>
                         <td>{{ $employee->function }}</td>
                         <td>
                             @if($employee->birthday_at != null )

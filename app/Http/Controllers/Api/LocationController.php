@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Captur;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,7 @@ class LocationController extends Controller
      */
     public function index()
     {
+        $capturs = Captur::all();
         $locations = DB::table('locations')->select(DB::raw('captur_id'))->groupBy('captur_id')->get();
 
         $taille = count($locations);
@@ -23,8 +25,11 @@ class LocationController extends Controller
             $location[$i] = Location::orderBy('created_at', 'desc')->where('captur_id', '=', $locations[$i]->captur_id)->first();
         }
 
-        return $location;
-    }
+        return [
+            'locations' => $location,
+            'capturs' => $capturs
+        ];
+    }   
 
     /**
      * Store a newly created resource in storage.

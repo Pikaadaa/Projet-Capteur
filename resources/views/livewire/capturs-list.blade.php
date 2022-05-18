@@ -37,8 +37,8 @@
             <tbody>
                 @foreach($capturs as $captur)
                     <tr>
-                        <th scope="row"><a class="text-black text-decoration-none" href='{{ route('capturs.show',['captur' => $captur]) }}'>{{ $captur->id }}</a></th>
-                        <td>{{ $captur->device }}</td>
+                        <th scope="row">{{ $captur->id }}</th>
+                        <td><a class="text-primary text-decoration-underline" href='{{ route('capturs.show',['captur' => $captur]) }}'>{{ $captur->device }}</a></td>
                         <td>
                             @if($captur->vehicle != null )
                                 {{ $captur->vehicle->registration }}

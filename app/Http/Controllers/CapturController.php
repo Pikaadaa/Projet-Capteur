@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Captur;
 use App\Models\Vehicle;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Cornford\Googlmapper\Mapper;
 use Illuminate\Support\Facades\Http;
@@ -101,7 +102,9 @@ class CapturController extends Controller
      */
     public function destroy(Captur $captur)
     {
-        $captur ->delete();
+        $captur->delete();
+
+        Location::where('captur_id', '=', $captur->id)->delete();
 
         return redirect()->route('capturs.index')->with('success', 'Capteur supprimé !');
     }

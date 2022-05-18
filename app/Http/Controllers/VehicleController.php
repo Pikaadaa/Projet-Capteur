@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Captur;
 use App\Models\Vehicle;
 use App\Models\Employee;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Http;
