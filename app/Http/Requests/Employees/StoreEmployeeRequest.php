@@ -28,7 +28,8 @@ class StoreEmployeeRequest extends FormRequest
             'first_name' => 'required','string',
             'last_name' => 'required','string',
             'function' => 'required','string','min:2',
-            'birthday_at' => 'nullable','date_format:"d-m-Y"'
+            'birthday_at' => 'nullable','date_format:"d-m-Y"',
+            'image' => 'nullable','image','size:500'
         ];
     }
 
@@ -41,7 +42,9 @@ class StoreEmployeeRequest extends FormRequest
             'last_name.string' => "Veuillez renseignez un nom valide.",
             'function.required' => "Veuillez renseignez une fonction.",
             'function.string' => "Veuillez renseignez une fonction valide.",
-            'bithday_at.date_format:"d-m-Y"' => "Veuillez renseignez une date au format(j/m/aaaa)"
+            'bithday_at.date_format:"d-m-Y"' => "Veuillez renseignez une date au format(j/m/aaaa)",
+            'image.image' => "Veuillez renseignez une image de type jpg, jpeg, png, bmp, gif, svg, ou webp",
+            'image.size' => "Image trop volumineuse"
         ];
     }
 }

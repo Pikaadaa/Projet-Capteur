@@ -2101,11 +2101,8 @@ window.onload = function () {
 
       $('.balise').click(function (event) {
         var id = event.target.id;
-        console.log(id);
 
         for (var i = 0; i < response['locations']['length']; i++) {
-          console.log(response['locations'][i]['captur_id']);
-
           if (id == response['locations'][i]['captur_id']) {
             mapv.setView([response['locations'][i]['latitude'], response['locations'][i]['longitude']], 19);
           }
@@ -2118,19 +2115,18 @@ window.onload = function () {
 
 
   if (map_auth != null) {
-    var map = L.map('map').setView([50.987242, 2.128793], 16);
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 18,
-      id: 'mapbox/streets-v11',
-      tileSize: 512,
-      zoomOffset: -1,
-      accessToken: 'pk.eyJ1IjoicGlrYWRhYSIsImEiOiJjbDJrOGkwa2gwMHlpM2NtdW5zeDNuOG81In0.sCA9Fv3WUC25GWLJcZxTvw'
-    }).addTo(map);
     fetch("http://capturs.test/api/locations").then(function (response) {
       return response.json();
     }).then(function (response) {
-      console.log(response);
+      var map = L.map('map').setView([response['locations'][0]["latitude"], response['locations'][0]["longitude"]], 16);
+      L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoicGlrYWRhYSIsImEiOiJjbDJrOGkwa2gwMHlpM2NtdW5zeDNuOG81In0.sCA9Fv3WUC25GWLJcZxTvw'
+      }).addTo(map);
 
       for (var i = 0; i < response['locations']['length']; i++) {
         var marker = L.marker([response['locations'][i]["latitude"], response['locations'][i]["longitude"]]).addTo(map);
@@ -2139,11 +2135,8 @@ window.onload = function () {
 
       $('.balise').click(function (event) {
         var id = event.target.id;
-        console.log(id);
 
         for (var i = 0; i < response['locations']['length']; i++) {
-          console.log(response['locations'][i]['captur_id']);
-
           if (id == response['locations'][i]['captur_id']) {
             map.setView([response['locations'][i]['latitude'], response['locations'][i]['longitude']], 19);
           }

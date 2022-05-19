@@ -13,7 +13,7 @@ class StoreCapturRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,8 +24,9 @@ class StoreCapturRequest extends FormRequest
     public function rules()
     {
         return [
-            'device' => 'required','string','unique:capturs',
-            'vehicle_id' => 'nullable|exists:vehicle,id'
+            'device' => 'required|string|unique:capturs',
+            'battery' => 'nullable',
+            'vehicle_id' => 'nullable|integer'
         ];
     }
 

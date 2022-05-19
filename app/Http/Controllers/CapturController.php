@@ -44,7 +44,7 @@ class CapturController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCapturRequest $request)
     {
         Captur::create($request->all()); 
 
@@ -87,7 +87,7 @@ class CapturController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Captur $captur)
+    public function update(UpdateCapturRequest $request, Captur $captur)
     {
         $captur->update($request->all());
 

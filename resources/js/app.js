@@ -57,18 +57,18 @@ window.onload = function () {
 
     if (map_auth != null) {
 
-        var map = L.map('map').setView([50.987242, 2.128793], 16);
-
-        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox/streets-v11',
-            tileSize: 512,
-            zoomOffset: -1,
-            accessToken: 'pk.eyJ1IjoicGlrYWRhYSIsImEiOiJjbDJrOGkwa2gwMHlpM2NtdW5zeDNuOG81In0.sCA9Fv3WUC25GWLJcZxTvw'
-        }).addTo(map);
-
         fetch("http://capturs.test/api/locations").then(response => response.json()).then(response => {
+            var map = L.map('map').setView([response['locations'][0]["latitude"], response['locations'][0]["longitude"]], 16);
+
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1,
+                accessToken: 'pk.eyJ1IjoicGlrYWRhYSIsImEiOiJjbDJrOGkwa2gwMHlpM2NtdW5zeDNuOG81In0.sCA9Fv3WUC25GWLJcZxTvw'
+            }).addTo(map);
+
             for (var i = 0; i < response['locations']['length']; i++) {
                 var marker = L.marker([response['locations'][i]["latitude"], response['locations'][i]["longitude"]]).addTo(map);
                 marker.bindPopup("<b>" + response['capturs'][i]['device'] + "</b>").openPopup();

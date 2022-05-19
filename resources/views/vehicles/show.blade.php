@@ -53,11 +53,11 @@
                 <div class="">
                     <p class="fw-bold d-inline">Capteur assigné : </p>
                     <p class="d-inline">
-                        @if($vehicle->capturs()->count() > 0)
+                        @if($vehicle->capturs()->count() > 0 )
                             @foreach($vehicle->capturs as $captur)
                                 {{ $captur->device }}
                             @endforeach
-                        @else   
+                        @else                                                                       
                             Aucun
                         @endif
                     </p>
@@ -75,8 +75,7 @@
 
         <div class="no_err mb-2 mt-0" id="err">
         </div>
-
-        @if(isset($vehicle->capturs[0]))
+        @if($vehicle->captursLocations()->count() > 0 )
             <div class="parent mb-0">
                 <div class="mt-2 mr-3 div1 bg-dark text-white"> 
                     <h1 class="pb-5 pt-5 h4 text-center">Liste des capteurs</h1>
