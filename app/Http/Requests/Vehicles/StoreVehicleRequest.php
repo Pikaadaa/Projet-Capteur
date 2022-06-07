@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Vehicles;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreVehicleRequest extends FormRequest
@@ -27,7 +28,7 @@ class StoreVehicleRequest extends FormRequest
             'name' => 'required',
             'brand' => 'required',
             'model' => 'required',
-            'registration' => 'required|unique:vehicles',
+            'registration' => ['required', Rule::unique('vehicles')->whereNull('deleted_at')],
             'kilometer' => 'required|numeric|min:0',
             'year_of_manufacture' => 'required','numeric',
             'date_of_establishment' => 'required','date_format:"d-m-Y"',

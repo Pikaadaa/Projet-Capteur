@@ -43,7 +43,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::create($request->all()); 
 
-        $this->storeImage($employee);
+        $employee->storeImage($employee);
 
         return redirect()->route('employees.index')->with('success', 'Employé enregistré !');
     }
@@ -108,11 +108,4 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index')->with('success', 'Employé supprimé !');
     }
 
-    public function storeImage(Employee $employee){
-        if (request('image')){
-            $employee->update([
-                'image' => request('image')->store('picture', 'public')
-            ]);
-        }
-    }
 }

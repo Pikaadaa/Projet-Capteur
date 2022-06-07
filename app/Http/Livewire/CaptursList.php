@@ -6,6 +6,7 @@ use App\Models\Captur;
 use App\Models\Vehicle;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Pagination\Paginator;
 
 class CaptursList extends Component
 {
@@ -15,7 +16,7 @@ class CaptursList extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $device;
-    public $perPage = 5 ;
+    public $perPage = 10 ;
 
 
     public function render()

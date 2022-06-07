@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="container">
         <div class="row">
             <div class="col">
@@ -11,8 +10,7 @@
                 <button class="mt-4 btn btn-success "><a class="text-white text-decoration-none" href="{{ route('capturs.create') }}">Ajouter</a></button>
             </div>
         </div>
+
+        @livewire('capturs-list')
     </div>
-
-    @livewire('capturs-list')
-
 @endsection

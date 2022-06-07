@@ -20,7 +20,7 @@ class MapController extends Controller
         $capturs = Captur::all();
 
         foreach($capturs as $captur){
-            $data = Http::get('https://api.capturs.com/device/'. $captur->device .'/position/limit/1?login=DzSaFKtfJhWY73qpI2mC94888QU2&password=228E7F9CED1DEDBE')->json();
+            $data = Http::get('https://api.capturs.com/device/'. $captur->device .'/position/limit/1?login='. env('CAPTURS_LOGIN') . '&password='. env('CAPTURS_MDP'))->json();
         }
 
         if(isset($data['result'])){
@@ -38,71 +38,5 @@ class MapController extends Controller
         return view('maps.index', [
             'capturs' => $capturs
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

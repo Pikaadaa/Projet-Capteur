@@ -10,27 +10,6 @@ use App\Http\Controllers\Controller;
 class VehicleController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -39,7 +18,7 @@ class VehicleController extends Controller
     public function show(Vehicle $vehicle)
     {
         $i = 0 ;
-        $vehicles = $vehicle->capturs;
+        $vehiclesCapturs = $vehicle->capturs;
 
         foreach($vehicle->capturs as $captur){
             $locations[$i] = Location::orderBy('created_at', 'desc')->where('captur_id', '=', $captur->id)->first();
@@ -48,30 +27,7 @@ class VehicleController extends Controller
 
         return[
             'locations' => $locations,
-            'vehicles' => $vehicles
+            'vehicles' => $vehiclesCapturs
         ];
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

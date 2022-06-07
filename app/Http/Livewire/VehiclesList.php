@@ -16,7 +16,7 @@ class VehiclesList extends Component
 
     public $registration;
     public $brand;
-    public $perPage = 5;
+    public $perPage = 10;
 
     public function render()
     {

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class='container'>
+    <div class="container">
         <h1 class="h1">Modifier</h1>
         <button class="btn btn-danger"><a class="text-white text-decoration-none" href="{{ route('employees.index')}}">Annuler</a></button>
         <form method="POST" action="{{ route('employees.update', ['employee'=> $employee]) }}" enctype="multipart/form-data">
@@ -43,5 +43,4 @@
             </div>
         </form>
     </div>
-
 @endsection

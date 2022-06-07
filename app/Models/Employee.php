@@ -31,6 +31,24 @@ class Employee extends Model
         return $this->last_name . ' '. $this->first_name;
     }
 
+    public function getImagePathAttribute(){
+        $path = '/picture/765-default-avatar.png';
+
+        if($this->image != null){
+            $path = $this->image;
+        }
+
+        return $path;
+    }
+
+    public function storeImage(Employee $employee){
+        if (request('image')){
+            $employee->update([
+                'image' => request('image')->store('picture', 'public')
+            ]);
+        }
+    }
+
     public function vehicles(){
         return $this->hasMany(Vehicle::class);
     }

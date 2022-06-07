@@ -11,6 +11,21 @@ $(function () {
     });
 });
 
+let btn = document.querySelector("#btn");
+let sidebar = document.querySelector(".sidebar");
+
+btn.onclick = function () {
+    sidebar.classList.toggle('active');
+}
+
+$(document).on('click', '#activemodal', function (event) {
+    if (document.getElementById("activemodal").checked == true)
+        $('#modal').modal('show');
+    if ($('#cancel').click(function (e2) {
+        document.getElementById("activemodal").checked = false;
+    }));
+});
+
 window.onload = function () {
 
     var mapv_auth = document.getElementById('mapv');
@@ -48,7 +63,7 @@ window.onload = function () {
                     }
                 }
             });
-        }).catch(error => alert("Aucune localisation trouvée"));
+        }).catch(console.log('erreur'));
 
     }
 
@@ -58,7 +73,11 @@ window.onload = function () {
     if (map_auth != null) {
 
         fetch("http://capturs.test/api/locations").then(response => response.json()).then(response => {
-            var map = L.map('map').setView([response['locations'][0]["latitude"], response['locations'][0]["longitude"]], 16);
+            if (response['locations'] != null) {
+                var map = L.map('map').setView([response['locations'][0]["latitude"], response['locations'][0]["longitude"]], 16);
+            } else {
+                var map = L.map('map').setView([50.2, 2], 9);
+            }
 
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -81,7 +100,7 @@ window.onload = function () {
                     }
                 }
             });
-        }).catch(error => alert("Aucune localisation trouvée"));
+        }).catch(console.log('erreur'));
     }
 }
 

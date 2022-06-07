@@ -2,6 +2,25 @@
 
 @section('content')
     <div class="container">
+        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title h5" id="exampleModalLabel">Modification Capteur</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5>Ce capteur est déjà assigné à une voiture</h5>
+                    <h5>Etes vous sur de vouloir modifier l'assignation du capteur ?</h5>
+                </div>
+                <div class="modal-footer">
+                  <button id="cancel" type="button" class="btn btn-secondary bg-secondary" data-bs-dismiss="modal">Annuler</button>
+                  <button id="continue" type="button" class="btn btn-primary bg-primary" data-bs-dismiss="modal">Continuer</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
         <h1 class="h1">Ajouter un véhicule</h1>
         <button class="btn btn-danger"><a class="text-white text-decoration-none" href="{{ route('vehicles.index')}}">Annuler</a></button>
         <form method="POST" action="{{ route('vehicles.store') }}">
@@ -56,10 +75,34 @@
                     </select>
                     <p class="text-danger">{{ $errors->first('employee_id') }}</p>
                 </div>
+
+                <table class="table table-striped table-responsive-xl text-center">
+                    <thead>
+                      <tr>
+                        <th scope="col">Capteur</th>
+                        <th scope="col">Association Actuelle</th>
+                        <th scope="col">Associer</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($capturs as $captur)
+                        <tr>
+                            <td>{{ $captur->device}}</td>
+                            <td>
+                            @if($captur->vehicle)
+                                {{ $captur->vehicle->name}} | {{ $captur->vehicle->registration }}
+                            @else
+                                Aucun
+                            @endif
+                            </td>
+                            <td><input type="checkbox" id="@if($captur->vehicle != null)activemodal" @endif name='captur_ids[{{ $captur->id }}]' value="{{ $captur->id }}"  @if(old('captur_ids.'.$captur->id) != null) checked @endif></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
                 
-                <button class="bg-success btn btn-success" type="submit">Ajouter</button>
+                <button class="bg-success btn btn-success" id="buttonModal" type="button">Ajouter</button>
             </div>
         </form>
     </div>
-
 @endsection

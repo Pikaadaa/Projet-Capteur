@@ -104,8 +104,6 @@ class CapturController extends Controller
     {
         $captur->delete();
 
-        Location::where('captur_id', '=', $captur->id)->delete();
-
         return redirect()->route('capturs.index')->with('success', 'Capteur supprimé !');
     }
 }

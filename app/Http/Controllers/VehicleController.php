@@ -34,12 +34,18 @@ class VehicleController extends Controller
     }
 
     public function store(StoreVehicleRequest $request){
-
         Vehicle::create($request->all());
+
+        if($request->captur_ids){
+            foreach($request->captur_ids as $captur_id){
+                $vehicle = Vehicle::where('registration', '=', $request->registration)->first();
+                Captur::where('id',$captur_id)->update(['vehicle_id' => $vehicle->id]);
+            }
+        }
 
         $vehicle = Vehicle::where('registration', $request->registration)->first();
  
-        return redirect()->route('vehicles.show',['vehicle' => $vehicle]);
+        return redirect()->route('vehicles.show',['vehicle' => $vehicle])->with('success', 'Véhicule enregistré !');
     }
 
     public function show(Vehicle $vehicle){

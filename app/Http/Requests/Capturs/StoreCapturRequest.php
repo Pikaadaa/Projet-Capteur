@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Capturs;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCapturRequest extends FormRequest
@@ -24,7 +25,7 @@ class StoreCapturRequest extends FormRequest
     public function rules()
     {
         return [
-            'device' => 'required|string|unique:capturs',
+            'device' => ['required', 'string', Rule::unique('capturs')->whereNull('deleted_at')],
             'battery' => 'nullable',
             'vehicle_id' => 'nullable|integer'
         ];

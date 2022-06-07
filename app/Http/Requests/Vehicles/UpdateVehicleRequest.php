@@ -30,7 +30,7 @@ class UpdateVehicleRequest extends FormRequest
             'name' => 'required',
             'brand' => 'required',
             'model' => 'required',
-            'registration' => ['required', Rule::unique('vehicles', 'registration')->ignore($vehicle->registration, 'registration')],
+            'registration' => ['required', Rule::unique('vehicles', 'registration')->ignore($vehicle->registration, 'registration')->whereNull('deleted_at')],
             'kilometer' => 'required|numeric|min:0',
             'year_of_manufacture' => 'required','numeric',
             'date_of_establishment' => 'required','date_format:"d-m-Y"',

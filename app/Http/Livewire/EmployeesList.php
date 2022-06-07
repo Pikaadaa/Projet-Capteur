@@ -17,7 +17,7 @@ class EmployeesList extends Component
 
     public $name;
     public $function;
-    public $perPage = 5;
+    public $perPage = 10;
 
     public function render()
     {

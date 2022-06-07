@@ -1,4 +1,4 @@
-<div class='container'>
+<div>
     <div class="mt-5 mb-4">
         <div class="w-auto row">
 
@@ -82,7 +82,7 @@
                             <form action="{{ route('vehicles.destroy',['vehicle' => $vehicle]) }}" class="d-inline-block" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button class="bg-danger btn btn-danger" type="submit">Supprimer</button>
+                                <button class="bg-danger btn btn-danger" type="submit" value="{{ $vehicle->id }}">Supprimer</button>
                             </form>
                         </td>
                     </tr>

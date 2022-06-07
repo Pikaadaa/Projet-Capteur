@@ -1,5 +1,5 @@
-<div class="container">
-    <div class="mt-5 mb-4 container">
+<div>
+    <div class="mt-5 mb-4">
         <div class="w-auto row">
 
             <p class="h4 col-auto">Filtrer</p>
@@ -74,5 +74,4 @@
     <div class="pagination">
         {{ $employees->links() }}
     </div>
-
 </div>

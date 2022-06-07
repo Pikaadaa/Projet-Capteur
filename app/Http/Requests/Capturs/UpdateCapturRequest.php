@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Capturs;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCapturRequest extends FormRequest
@@ -23,8 +24,10 @@ class UpdateCapturRequest extends FormRequest
      */
     public function rules()
     {
+        $captur = $this->route()->parameter('captur');
+
         return [
-            'device' => 'required|string|unique:capturs',
+            'device' => ['required','string', Rule::unique('capturs', 'device')->ignore($captur->device, 'device')->whereNull('deleted_at')],
             'battery' => 'nullable',
             'vehicle_id' => 'nullable|integer'
         ];

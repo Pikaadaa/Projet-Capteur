@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <div class='container'>
+    <div class="container">
         <div class="row">
             <div class="col">
                 <h1 class="mt-4 h1">Liste des véhicules</h1>
@@ -12,8 +11,8 @@
                 <button class="mt-4 btn btn-success "><a class="text-white text-decoration-none" href="{{ route('vehicles.create') }}">Ajouter</a></button>
             </div>
         </div>
-    </div>
         
-    @livewire('vehicles-list')
-
+        @livewire('vehicles-list')
+    </div>
+ 
 @endsection
